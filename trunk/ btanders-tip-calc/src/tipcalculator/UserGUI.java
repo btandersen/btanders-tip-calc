@@ -14,7 +14,6 @@ package tipcalculator;
 
 // Imports
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
@@ -1114,7 +1113,7 @@ public class UserGUI extends javax.swing.JFrame
         }
         else
         {
-            this.tipPerPersonLabel.setText("Tip Per Person");
+            this.tipPerPersonLabel.setText("Tip Per Person ($)");
         }
 
         // Update the GUI

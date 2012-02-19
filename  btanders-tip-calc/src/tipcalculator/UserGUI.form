@@ -96,7 +96,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="overallRating" alignment="0" pref="275" max="32767" attributes="0"/>
+                          <Component id="overallRating" alignment="0" pref="278" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
@@ -247,7 +247,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Bill Amount"/>
+                <Property name="text" type="java.lang.String" value="Bill Amount ($)"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="billDeductions">
@@ -262,7 +262,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Bill Deductions"/>
+                <Property name="text" type="java.lang.String" value="Bill Deductions ($)"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tax">
@@ -277,7 +277,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Tax"/>
+                <Property name="text" type="java.lang.String" value="Tax ($)"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
@@ -295,7 +295,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Total Tip"/>
+                <Property name="text" type="java.lang.String" value="Total Tip ($)"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="totalTip">
@@ -308,7 +308,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="tipPerPersonLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Tip Per Person"/>
+                <Property name="text" type="java.lang.String" value="Tip Per Person ($)"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tipPerPerson">
@@ -329,7 +329,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Total"/>
+                <Property name="text" type="java.lang.String" value="Total ($)"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="useTipTailoring">
@@ -368,18 +368,49 @@
                           <Component id="guest8" max="32767" attributes="0"/>
                           <Component id="guest9" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="93" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="guest1Tip" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="guest2Tip" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="guest3Tip" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="guest4Tip" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="guest5Tip" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="guest6Tip" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="guest7Tip" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="guest8Tip" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="guest9Tip" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="guest9Tip" pref="71" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="guest1Tip" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="guest2Tip" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="guest3Tip" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="guest4Tip" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="guest5Tip" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="guest6Tip" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="guest7Tip" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="guest8Tip" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -407,7 +438,11 @@
                               <Component id="guest1rating" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="guest1Tip" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="guest1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="guest1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -415,7 +450,11 @@
                               <Component id="guest2rating" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="guest2Tip" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="guest2" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="guest2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -423,7 +462,10 @@
                           <Group type="102" attributes="0">
                               <Component id="guest3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="guest3Tip" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="guest3Tip" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -432,7 +474,11 @@
                               <Component id="guest4rating" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="guest4Tip" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="guest4" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="guest4" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -440,7 +486,11 @@
                               <Component id="guest5rating" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="guest5Tip" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="guest5" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="guest5" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -448,7 +498,11 @@
                               <Component id="guest6rating" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="guest6Tip" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="guest6" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="guest6" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -456,7 +510,11 @@
                               <Component id="guest7rating" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="guest7Tip" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="guest7" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="guest7" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -464,7 +522,11 @@
                               <Component id="guest8rating" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="guest8Tip" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="guest8" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="guest8" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -472,7 +534,11 @@
                               <Component id="guest9rating" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="guest9Tip" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="guest9" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="guest9" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace pref="34" max="32767" attributes="0"/>
                   </Group>
@@ -644,56 +710,110 @@
             </Component>
             <Component class="javax.swing.JTextField" name="guest1Tip">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jTextField1"/>
+                <Property name="horizontalAlignment" type="int" value="4"/>
+                <Property name="text" type="java.lang.String" value="0.00"/>
                 <Property name="toolTipText" type="java.lang.String" value="The tip amount for this guest."/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="guest2Tip">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jTextField1"/>
+                <Property name="horizontalAlignment" type="int" value="4"/>
+                <Property name="text" type="java.lang.String" value="0.00"/>
                 <Property name="toolTipText" type="java.lang.String" value="The tip amount for this guest."/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="guest3Tip">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jTextField1"/>
+                <Property name="horizontalAlignment" type="int" value="4"/>
+                <Property name="text" type="java.lang.String" value="0.00"/>
                 <Property name="toolTipText" type="java.lang.String" value="The tip amount for this guest."/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="guest4Tip">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jTextField1"/>
+                <Property name="horizontalAlignment" type="int" value="4"/>
+                <Property name="text" type="java.lang.String" value="0.00"/>
                 <Property name="toolTipText" type="java.lang.String" value="The tip amount for this guest."/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="guest5Tip">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jTextField1"/>
+                <Property name="horizontalAlignment" type="int" value="4"/>
+                <Property name="text" type="java.lang.String" value="0.00"/>
                 <Property name="toolTipText" type="java.lang.String" value="The tip amount for this guest."/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="guest6Tip">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jTextField1"/>
+                <Property name="horizontalAlignment" type="int" value="4"/>
+                <Property name="text" type="java.lang.String" value="0.00"/>
                 <Property name="toolTipText" type="java.lang.String" value="The tip amount for this guest."/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="guest7Tip">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jTextField1"/>
+                <Property name="horizontalAlignment" type="int" value="4"/>
+                <Property name="text" type="java.lang.String" value="0.00"/>
                 <Property name="toolTipText" type="java.lang.String" value="The tip amount for this guest."/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="guest8Tip">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jTextField1"/>
+                <Property name="horizontalAlignment" type="int" value="4"/>
+                <Property name="text" type="java.lang.String" value="0.00"/>
                 <Property name="toolTipText" type="java.lang.String" value="The tip amount for this guest."/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="guest9Tip">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jTextField1"/>
+                <Property name="horizontalAlignment" type="int" value="4"/>
+                <Property name="text" type="java.lang.String" value="0.00"/>
                 <Property name="toolTipText" type="java.lang.String" value="The tip amount for this guest."/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel9">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Individual Tip ($)"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel16">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Individual Tip ($)"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel17">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Individual Tip ($)"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel18">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Individual Tip ($)"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel19">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Individual Tip ($)"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel20">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Individual Tip ($)"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel21">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Individual Tip ($)"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel22">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Individual Tip ($)"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel23">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Individual Tip ($)"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -715,7 +835,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jSeparator2" max="32767" attributes="0"/>
                           <Component id="jLabel11" max="32767" attributes="0"/>
-                          <Component id="jLabel14" alignment="0" pref="275" max="32767" attributes="0"/>
+                          <Component id="jLabel14" alignment="0" pref="278" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>

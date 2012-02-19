@@ -13,6 +13,7 @@
 package tipcalculator;
 
 // Imports
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import javax.swing.JSlider;
@@ -28,12 +29,12 @@ import javax.swing.JTextField;
 public class UserGUI extends javax.swing.JFrame
 {
 
-    // 
+    // Private member fields
     private ArrayList<JTextField> guestList;
     private ArrayList<JSlider> guestRatings;
     private ArrayList<JTextField> guestTips;
-    private NumberFormat currencyFormatter;
-    private NumberFormat percentFormatter;
+    private DecimalFormat currencyFormatter;
+    private DecimalFormat percentFormatter;
     private double billAmountNum;
     private double billDeductionsNum;
     private double taxNum;
@@ -54,8 +55,8 @@ public class UserGUI extends javax.swing.JFrame
 
         // These NumberFormat tools offer conversion of numeric types to either
         // currency or percentage for nicer display
-        this.currencyFormatter = NumberFormat.getCurrencyInstance();
-        this.percentFormatter = NumberFormat.getPercentInstance();
+        this.currencyFormatter = new DecimalFormat("#0.00");
+        this.percentFormatter = new DecimalFormat("#0.0");
 
         // Initialize the ArrayLists, for future versions, this can be done
         // using dynamically created objects rather than specifying members
@@ -93,9 +94,9 @@ public class UserGUI extends javax.swing.JFrame
         this.numberOfGuests.setSelectedIndex(0);
         this.overallRating.setValue(3);
 
-        this.billAmount.setText("$0.00");
-        this.billDeductions.setText("$0.00");
-        this.tax.setText("$0.00");
+        this.billAmount.setText("0.00");
+        this.billDeductions.setText("0.00");
+        this.tax.setText("0.00");
 
         this.billAmountNum = 0.0;
         this.billDeductionsNum = 0.0;
@@ -104,10 +105,10 @@ public class UserGUI extends javax.swing.JFrame
         this.minTipPercentNum = 5.0;
         this.maxTipPercentNum = 25.0;
 
-        this.minTipPercent.setText(this.percentFormatter.format(this.minTipPercentNum / 100.0));
-        this.maxTipPercent.setText(this.percentFormatter.format(this.maxTipPercentNum / 100.0));
+        this.minTipPercent.setText(this.percentFormatter.format(this.minTipPercentNum));
+        this.maxTipPercent.setText(this.percentFormatter.format(this.maxTipPercentNum));
 
-        this.tipRate.setText(this.percentFormatter.format(this.getTipRate() / 100.0).toString());
+        this.tipRate.setText(this.percentFormatter.format(this.getTipRate()).toString());
         this.totalTip.setText("0.00");
         this.tipPerPerson.setText("0.00");
         this.total.setText("0.00");
@@ -189,6 +190,15 @@ public class UserGUI extends javax.swing.JFrame
         guest7Tip = new javax.swing.JTextField();
         guest8Tip = new javax.swing.JTextField();
         guest9Tip = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         minTipPercent = new javax.swing.JTextField();
@@ -246,7 +256,7 @@ public class UserGUI extends javax.swing.JFrame
             }
         });
 
-        jLabel4.setText("Bill Amount");
+        jLabel4.setText("Bill Amount ($)");
 
         billDeductions.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         billDeductions.setText("0.00");
@@ -257,7 +267,7 @@ public class UserGUI extends javax.swing.JFrame
             }
         });
 
-        jLabel5.setText("Bill Deductions");
+        jLabel5.setText("Bill Deductions ($)");
 
         tax.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         tax.setText("0.00");
@@ -268,7 +278,7 @@ public class UserGUI extends javax.swing.JFrame
             }
         });
 
-        jLabel6.setText("Tax");
+        jLabel6.setText("Tax ($)");
 
         jLabel7.setText("Tip Rate (%)");
 
@@ -277,14 +287,14 @@ public class UserGUI extends javax.swing.JFrame
         tipRate.setText("jTextField4");
         tipRate.setToolTipText("Determined from the specified range in settings and the Quality of Service rating, where a rating of 3 gives the midpoint value between the minimum and maximum tip percent. A 1 yields the minimum and a 5 the maximum tip percentage.");
 
-        jLabel8.setText("Total Tip");
+        jLabel8.setText("Total Tip ($)");
 
         totalTip.setEditable(false);
         totalTip.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         totalTip.setText("jTextField5");
         totalTip.setToolTipText("Either the total tip based on the Tip Per Person value multiplied by the Number of Guests, or if tailored tipping is used, the sum of each individual's tailored tip amount.");
 
-        tipPerPersonLabel.setText("Tip Per Person");
+        tipPerPersonLabel.setText("Tip Per Person ($)");
 
         tipPerPerson.setEditable(false);
         tipPerPerson.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -296,7 +306,7 @@ public class UserGUI extends javax.swing.JFrame
         total.setText("jTextField7");
         total.setToolTipText("The total bill including deductions, taxes and tips.");
 
-        jLabel10.setText("Total");
+        jLabel10.setText("Total ($)");
 
         useTipTailoring.setText("Check to Use Tailored Tip Values in Totals");
         useTipTailoring.setToolTipText("Check this box to use the Tip Tailoring screen in you calculations.");
@@ -313,7 +323,7 @@ public class UserGUI extends javax.swing.JFrame
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(overallRating, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                    .addComponent(overallRating, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -515,32 +525,59 @@ public class UserGUI extends javax.swing.JFrame
         guest9.setText("Guest 9");
         guest9.setToolTipText("Enter a guest name here for ease of assign tip amounts.");
 
-        guest1Tip.setText("jTextField1");
+        guest1Tip.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        guest1Tip.setText("0.00");
         guest1Tip.setToolTipText("The tip amount for this guest.");
 
-        guest2Tip.setText("jTextField1");
+        guest2Tip.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        guest2Tip.setText("0.00");
         guest2Tip.setToolTipText("The tip amount for this guest.");
 
-        guest3Tip.setText("jTextField1");
+        guest3Tip.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        guest3Tip.setText("0.00");
         guest3Tip.setToolTipText("The tip amount for this guest.");
 
-        guest4Tip.setText("jTextField1");
+        guest4Tip.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        guest4Tip.setText("0.00");
         guest4Tip.setToolTipText("The tip amount for this guest.");
 
-        guest5Tip.setText("jTextField1");
+        guest5Tip.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        guest5Tip.setText("0.00");
         guest5Tip.setToolTipText("The tip amount for this guest.");
 
-        guest6Tip.setText("jTextField1");
+        guest6Tip.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        guest6Tip.setText("0.00");
         guest6Tip.setToolTipText("The tip amount for this guest.");
 
-        guest7Tip.setText("jTextField1");
+        guest7Tip.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        guest7Tip.setText("0.00");
         guest7Tip.setToolTipText("The tip amount for this guest.");
 
-        guest8Tip.setText("jTextField1");
+        guest8Tip.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        guest8Tip.setText("0.00");
         guest8Tip.setToolTipText("The tip amount for this guest.");
 
-        guest9Tip.setText("jTextField1");
+        guest9Tip.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        guest9Tip.setText("0.00");
         guest9Tip.setToolTipText("The tip amount for this guest.");
+
+        jLabel9.setText("Individual Tip ($)");
+
+        jLabel16.setText("Individual Tip ($)");
+
+        jLabel17.setText("Individual Tip ($)");
+
+        jLabel18.setText("Individual Tip ($)");
+
+        jLabel19.setText("Individual Tip ($)");
+
+        jLabel20.setText("Individual Tip ($)");
+
+        jLabel21.setText("Individual Tip ($)");
+
+        jLabel22.setText("Individual Tip ($)");
+
+        jLabel23.setText("Individual Tip ($)");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -559,17 +596,41 @@ public class UserGUI extends javax.swing.JFrame
                     .addComponent(guest8)
                     .addComponent(guest9)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 93, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(guest1Tip, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(guest2Tip, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(guest3Tip, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(guest4Tip, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(guest5Tip, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(guest6Tip, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(guest7Tip, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(guest8Tip, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(guest9Tip, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(guest9Tip, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(guest1Tip))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(guest2Tip))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(guest3Tip))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(guest4Tip))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel19)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(guest5Tip))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(guest6Tip))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(guest7Tip))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel22)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(guest8Tip)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(guest1rating, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
@@ -591,56 +652,82 @@ public class UserGUI extends javax.swing.JFrame
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(guest1rating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(guest1Tip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(guest1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(guest1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel9)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(guest2rating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(guest2Tip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(guest2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(guest2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel16)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(guest3rating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(guest3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(guest3Tip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(guest3Tip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(guest4rating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(guest4Tip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(guest4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(guest4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel18)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(guest5rating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(guest5Tip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(guest5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(guest5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel19)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(guest6rating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(guest6Tip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(guest6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(guest6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel20)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(guest7rating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(guest7Tip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(guest7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(guest7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel21)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(guest8rating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(guest8Tip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(guest8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(guest8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel22)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(guest9rating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(guest9Tip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(guest9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(guest9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel23)))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -698,7 +785,7 @@ public class UserGUI extends javax.swing.JFrame
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator2)
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12)
@@ -920,7 +1007,7 @@ public class UserGUI extends javax.swing.JFrame
         }
 
         // Update the GUI
-        this.minTipPercent.setText(this.percentFormatter.format(this.minTipPercentNum / 100.0).toString());
+        this.minTipPercent.setText(this.percentFormatter.format(this.minTipPercentNum).toString());
         this.update();
     }//GEN-LAST:event_minTipPercentActionPerformed
 
@@ -954,7 +1041,7 @@ public class UserGUI extends javax.swing.JFrame
         }
 
         // Update the GUI
-        this.maxTipPercent.setText(this.percentFormatter.format(this.maxTipPercentNum / 100.0).toString());
+        this.maxTipPercent.setText(this.percentFormatter.format(this.maxTipPercentNum).toString());
         this.update();
     }//GEN-LAST:event_maxTipPercentActionPerformed
 
@@ -1039,7 +1126,7 @@ public class UserGUI extends javax.swing.JFrame
     private void update()
     {
         // Get the tipRate
-        this.tipRate.setText(this.percentFormatter.format(this.getTipRate() / 100.0).toString());
+        this.tipRate.setText(this.percentFormatter.format(this.getTipRate()).toString());
         // Get the per person tip amount
         this.tipPerPerson.setText(this.currencyFormatter.format(this.calcTipPerPerson()).toString());
         // Dim the per person tip value is tailoring is used
@@ -1049,7 +1136,7 @@ public class UserGUI extends javax.swing.JFrame
         // Update the total tip
         this.totalTip.setText(this.currencyFormatter.format(this.calcTotalTip()).toString());
         // Update the total amount
-        this.total.setText(this.currencyFormatter.format(this.billAmountNum - this.billDeductionsNum + this.taxNum + Double.parseDouble(this.totalTip.getText().substring(1))));
+        this.total.setText(this.currencyFormatter.format(this.billAmountNum - this.billDeductionsNum + this.taxNum + Double.parseDouble(this.totalTip.getText())));
     }
 
     // This method updates the guest list depending on how many guests are selected
@@ -1099,7 +1186,7 @@ public class UserGUI extends javax.swing.JFrame
             {
                 for (int i = 0; i < this.getNumberOfGuests(); i++)
                 {
-                    result = result + ((((this.maxTipPercentNum - this.minTipPercentNum) / 4.0) * (this.guestRatings.get(i).getValue() - 1) + this.minTipPercentNum) / (double) count); //this.getNumberOfGuests());
+                    result = result + (this.getIndividualTipRate(i) / (double) count); //this.getNumberOfGuests());
                 }
             }
             else
@@ -1121,7 +1208,6 @@ public class UserGUI extends javax.swing.JFrame
     // This method gets the tip rate for an individual when tailoring is used
     private double getIndividualTipRate(int index)
     {
-        /////////////////dfhfdghdfgh
         if (this.guestRatings.get(index).getValue() == 0)
         {
             return 0;
@@ -1193,13 +1279,13 @@ public class UserGUI extends javax.swing.JFrame
             // For tip tailoring, use the individual amounts
             for (int i = 0; i < this.getNumberOfGuests(); i++)
             {
-                result = result + Double.parseDouble(this.guestTips.get(i).getText().substring(1));
+                result = result + Double.parseDouble(this.guestTips.get(i).getText());
             }
         }
         else
         {
             // Otherwise use a straight even split
-            result = Double.parseDouble(this.tipPerPerson.getText().substring(1)) * this.getNumberOfGuests();
+            result = Double.parseDouble(this.tipPerPerson.getText()) * this.getNumberOfGuests();
         }
 
         return result;
@@ -1305,13 +1391,22 @@ public class UserGUI extends javax.swing.JFrame
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

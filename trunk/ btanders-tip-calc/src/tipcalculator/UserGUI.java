@@ -13,7 +13,6 @@
 package tipcalculator;
 
 // Imports
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
@@ -34,8 +33,6 @@ public class UserGUI extends javax.swing.JFrame
     private ArrayList<JTextField> guestList;
     private ArrayList<JSlider> guestRatings;
     private ArrayList<JTextField> guestTips;
-    //private DecimalFormat currencyFormatter;
-    //private DecimalFormat percentFormatter;
 
     /**
      * UserGUI Constructor to initialize the interface
@@ -87,9 +84,7 @@ public class UserGUI extends javax.swing.JFrame
         // Initialize all the fields to start with default values
         this.numberOfGuests.setSelectedIndex(0);
         this.overallRating.setValue(3);
-        
         this.update();
-
         this.statusText.setText("OK");
 
         for (int i = 0; i < this.guestList.size(); i++)
@@ -124,7 +119,7 @@ public class UserGUI extends javax.swing.JFrame
         overallRating = new javax.swing.JSlider();
         jLabel3 = new javax.swing.JLabel();
         numberOfGuests = new javax.swing.JComboBox();
-        billAmount = new javax.swing.JTextField();
+        billAmountText = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         billDeductions = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -223,13 +218,13 @@ public class UserGUI extends javax.swing.JFrame
             }
         });
 
-        billAmount.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        billAmount.setText("20.00");
-        billAmount.setToolTipText("The dollar amount of the bill, before taxes or deductions. Enter a numeric value greater than or equal to zero.");
-        billAmount.setName("");
-        billAmount.addActionListener(new java.awt.event.ActionListener() {
+        billAmountText.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        billAmountText.setText("20.00");
+        billAmountText.setToolTipText("The dollar amount of the bill, before taxes or deductions. Enter a numeric value greater than or equal to zero.");
+        billAmountText.setName("");
+        billAmountText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                billAmountActionPerformed(evt);
+                billAmountTextActionPerformed(evt);
             }
         });
 
@@ -317,7 +312,7 @@ public class UserGUI extends javax.swing.JFrame
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tax)
                             .addComponent(billDeductions)
-                            .addComponent(billAmount)
+                            .addComponent(billAmountText)
                             .addComponent(total, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
                             .addComponent(tipPerPerson)
                             .addComponent(totalTip)
@@ -344,7 +339,7 @@ public class UserGUI extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(billAmount))
+                    .addComponent(billAmountText))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -855,12 +850,12 @@ public class UserGUI extends javax.swing.JFrame
     }//GEN-LAST:event_overallRatingStateChanged
 
     // Event handler for when the bill amount input is updated
-    private void billAmountActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_billAmountActionPerformed
-    {//GEN-HEADEREND:event_billAmountActionPerformed
+    private void billAmountTextActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_billAmountTextActionPerformed
+    {//GEN-HEADEREND:event_billAmountTextActionPerformed
         // First try to convert the user supplied input to a double
         try
         {
-            double billAmount = Double.parseDouble(this.billAmount.getText());
+            double billAmount = Double.parseDouble(this.billAmountText.getText());
 
             // if it is numeric and convertible, do some range checks
             if (billAmount >= 0)
@@ -880,7 +875,7 @@ public class UserGUI extends javax.swing.JFrame
         }
 
         this.update();
-    }//GEN-LAST:event_billAmountActionPerformed
+    }//GEN-LAST:event_billAmountTextActionPerformed
 
     // Event handler for when the bill deduction input is updated
     private void billDeductionsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_billDeductionsActionPerformed
@@ -1086,13 +1081,12 @@ public class UserGUI extends javax.swing.JFrame
     private void update()
     {
         this.bill = this.tipCalculatorView.updateView(bill);
-        
-        this.billAmount.setText(this.tipCalculatorView.getBillAmount());
+
+        this.billAmountText.setText(this.tipCalculatorView.getBillAmount());
         this.billDeductions.setText(this.tipCalculatorView.getDeductionAmount());
         this.tax.setText(this.tipCalculatorView.getTaxAmount());
         this.minTipPercent.setText(this.tipCalculatorView.getMinTipPercent());
         this.maxTipPercent.setText(this.tipCalculatorView.getMaxTipPercent());
-
         // Get the tipRate
         this.tipRate.setText(this.tipCalculatorView.getTipRate());
         // Get the per person tip amount
@@ -1103,7 +1097,6 @@ public class UserGUI extends javax.swing.JFrame
         this.totalTip.setText(this.tipCalculatorView.getTipTotal());
         // Update the total amount
         this.total.setText(this.tipCalculatorView.getTotal());
-
         // Also, we calculate the individual tailored tip for each guest we needed
         for (int i = 0; i < this.getNumberOfGuests(); i++)
         {
@@ -1133,9 +1126,8 @@ public class UserGUI extends javax.swing.JFrame
     {
         this.statusText.setText(str);
     }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField billAmount;
+    private javax.swing.JTextField billAmountText;
     private javax.swing.JTextField billDeductions;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField guest1;

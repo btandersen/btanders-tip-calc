@@ -11,11 +11,22 @@ package tipcalculator;
  */
 public class TipCalculatorDelegate
 {
+    private static TipCalculatorDelegate instance = null;
     private TipCalculatorSession session;
     
-    public TipCalculatorDelegate()
+    private TipCalculatorDelegate()
     {
         this.session = TipCalculatorSession.getInstance();
+    }
+    
+    public static synchronized TipCalculatorDelegate getInstance()
+    {
+        if (TipCalculatorDelegate.instance == null)
+        {
+            TipCalculatorDelegate.instance = new TipCalculatorDelegate();
+        }
+
+        return TipCalculatorDelegate.instance;
     }
     
     public Bill createBill()

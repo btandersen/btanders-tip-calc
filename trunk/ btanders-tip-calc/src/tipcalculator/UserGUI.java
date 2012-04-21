@@ -34,13 +34,8 @@ public class UserGUI extends javax.swing.JFrame
     private ArrayList<JTextField> guestList;
     private ArrayList<JSlider> guestRatings;
     private ArrayList<JTextField> guestTips;
-    private DecimalFormat currencyFormatter;
-    private DecimalFormat percentFormatter;
-    //private double billAmountNum;
-    //private double billDeductionsNum;
-    //private double taxNum;
-    //private double minTipPercentNum;
-    //private double maxTipPercentNum;
+    //private DecimalFormat currencyFormatter;
+    //private DecimalFormat percentFormatter;
 
     /**
      * UserGUI Constructor to initialize the interface
@@ -56,11 +51,6 @@ public class UserGUI extends javax.swing.JFrame
         this.guestList = new ArrayList<JTextField>();
         this.guestRatings = new ArrayList<JSlider>();
         this.guestTips = new ArrayList<JTextField>();
-
-        // These NumberFormat tools offer conversion of numeric types to either
-        // currency or percentage for nicer display
-        this.currencyFormatter = new DecimalFormat("#0.00");
-        this.percentFormatter = new DecimalFormat("#0.0");
 
         // Initialize the ArrayLists, for future versions, this can be done
         // using dynamically created objects rather than specifying members
@@ -97,25 +87,8 @@ public class UserGUI extends javax.swing.JFrame
         // Initialize all the fields to start with default values
         this.numberOfGuests.setSelectedIndex(0);
         this.overallRating.setValue(3);
-
-        this.billAmount.setText("0.00");
-        this.billDeductions.setText("0.00");
-        this.tax.setText("0.00");
-
-//        this.billAmountNum = 0.0;
-//        this.billDeductionsNum = 0.0;
-//        this.taxNum = 0.0;
-//
-//        this.minTipPercentNum = 5.0;
-//        this.maxTipPercentNum = 25.0;
-//
-//        this.minTipPercent.setText(this.percentFormatter.format(this.minTipPercentNum));
-//        this.maxTipPercent.setText(this.percentFormatter.format(this.maxTipPercentNum));
-//
-//        this.tipRate.setText(this.percentFormatter.format(this.bill.tipRate).toString());
-//        this.totalTip.setText("0.00");
-//        this.tipPerPerson.setText("0.00");
-//        this.total.setText("0.00");
+        
+        this.update();
 
         this.statusText.setText("OK");
 
@@ -1114,27 +1087,27 @@ public class UserGUI extends javax.swing.JFrame
     {
         this.bill = this.tipCalculatorView.updateView(bill);
         
-        this.billAmount.setText(this.currencyFormatter.format(this.bill.billAmount).toString());
-        this.billDeductions.setText(this.currencyFormatter.format(this.bill.deductionAmount).toString());
-        this.tax.setText(this.currencyFormatter.format(this.bill.taxAmount).toString());
-        this.minTipPercent.setText(this.percentFormatter.format(this.bill.minTipPercent).toString());
-        this.maxTipPercent.setText(this.percentFormatter.format(this.bill.maxTipPercent).toString());
+        this.billAmount.setText(this.tipCalculatorView.getBillAmount());
+        this.billDeductions.setText(this.tipCalculatorView.getDeductionAmount());
+        this.tax.setText(this.tipCalculatorView.getTaxAmount());
+        this.minTipPercent.setText(this.tipCalculatorView.getMinTipPercent());
+        this.maxTipPercent.setText(this.tipCalculatorView.getMaxTipPercent());
 
         // Get the tipRate
-        this.tipRate.setText(this.percentFormatter.format(this.bill.tipRate).toString());
+        this.tipRate.setText(this.tipCalculatorView.getTipRate());
         // Get the per person tip amount
-        this.tipPerPerson.setText(this.currencyFormatter.format(this.bill.tipPerPerson).toString());
+        this.tipPerPerson.setText(this.tipCalculatorView.getTipPerPerson());
         // Dim the per person tip value is tailoring is used
-        this.tipPerPerson.setEnabled(!this.bill.tipTailoring);
+        this.tipPerPerson.setEnabled(!this.tipCalculatorView.getTipTailoring());
         // Update the total tip
-        this.totalTip.setText(this.currencyFormatter.format(this.bill.tipTotal).toString());
+        this.totalTip.setText(this.tipCalculatorView.getTipTotal());
         // Update the total amount
-        this.total.setText(this.currencyFormatter.format(this.bill.total));
+        this.total.setText(this.tipCalculatorView.getTotal());
 
         // Also, we calculate the individual tailored tip for each guest we needed
         for (int i = 0; i < this.getNumberOfGuests(); i++)
         {
-            this.guestTips.get(i).setText(this.currencyFormatter.format(this.bill.guestTips.get(i)));
+            this.guestTips.get(i).setText(this.tipCalculatorView.getGuestTip(i));
         }
     }
 
@@ -1155,195 +1128,12 @@ public class UserGUI extends javax.swing.JFrame
         return (this.numberOfGuests.getSelectedIndex() + 1);
     }
 
-//    // Calculates the tip rate based on whether tip tailoring is enabled
-//    private double getTipRate()
-//    {
-//        // If tailoring is enabled...
-//        if (this.useTipTailoring.isSelected())
-//        {
-//            double result = 0;
-//
-//            int count = 0;
-//
-//            // find out how many of the guest want to tip (slider not set to zero)
-//            for (int i = 0; i < this.getNumberOfGuests(); i++)
-//            {
-//                if (this.guestRatings.get(i).getValue() != 0)
-//                {
-//                    count++;
-//                }
-//            }
-//
-//            // From the users who do want to tip, determine the weighted tip rate
-//            if (count != 0)
-//            {
-//                for (int i = 0; i < this.getNumberOfGuests(); i++)
-//                {
-//                    result = result + (this.getIndividualTipRate(i) / (double) count); //this.getNumberOfGuests());
-//                }
-//            }
-//            else
-//            {
-//                result = 0;
-//            }
-//
-//
-//            return result;
-//        }
-//        // No tailoring...
-//        else
-//        {
-//            // Just calculate the tip rate using the overall slider
-//            return ((this.maxTipPercentNum - this.minTipPercentNum) / 4.0) * (this.overallRating.getValue() - 1) + this.minTipPercentNum;
-//        }
-//    }
-
-//    // This method gets the tip rate for an individual when tailoring is used
-//    private double getIndividualTipRate(int index)
-//    {
-//        if (this.guestRatings.get(index).getValue() == 0)
-//        {
-//            return 0;
-//        }
-//        else
-//        {
-//            return ((this.maxTipPercentNum - this.minTipPercentNum) / 4.0) * (this.guestRatings.get(index).getValue() - 1) + this.minTipPercentNum;
-//        }
-//    }
-
-//    // This method calculates the per person tip if tailoring is not used
-//    private double calcTipPerPerson()
-//    {
-//        return this.calcSubTotal() * (this.getTipRate() / 100.0) / this.getNumberOfGuests();
-//    }
-
-//    // Calculate an individual tip for a single guest in tailoring
-//    private double calcTipIndividual(int index)
-//    {
-//        int count = 0;
-//
-//        // See how many guests don't want to tip
-//        for (int i = 0; i < this.getNumberOfGuests(); i++)
-//        {
-//            if (this.guestRatings.get(i).getValue() != 0)
-//            {
-//                count++;
-//            }
-//        }
-//
-//        // If at least one person will tip, calculate the tip amount for the individual
-//        // based on their own tip rate
-//        if (count != 0)
-//        {
-//            return this.calcSubTotal() * (this.getIndividualTipRate(index) / 100.0) / count; //this.getNumberOfGuests();
-//        }
-//        else
-//        {
-//            return 0;
-//        }
-//    }
-
-//    // Calculates a subtotal depending on whether tips and deductions are to be used
-//    // in tip calculation
-//    private double calcSubTotal()
-//    {
-//        double result = this.billAmountNum;
-//
-//        if (this.includeTax.isSelected())
-//        {
-//            result = result + this.taxNum;
-//        }
-//
-//        if (this.includeDeductions.isSelected())
-//        {
-//            result = result - this.billDeductionsNum;
-//        }
-//
-//        return result;
-//    }
-
-//    // Determines the total tip based on either tailoring or straight up even split
-//    private double calcTotalTip()
-//    {
-//        double result = 0;
-//
-//        if (this.useTipTailoring.isSelected())
-//        {
-//            // For tip tailoring, use the individual amounts
-//            for (int i = 0; i < this.getNumberOfGuests(); i++)
-//            {
-//                result = result + Double.parseDouble(this.guestTips.get(i).getText());
-//            }
-//        }
-//        else
-//        {
-//            // Otherwise use a straight even split
-//            result = Double.parseDouble(this.tipPerPerson.getText()) * this.getNumberOfGuests();
-//        }
-//
-//        return result;
-//    }
-
     // Updates the status message with messages for the user
     private void statusMessage(String str)
     {
         this.statusText.setText(str);
     }
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[])
-//    {
-//        /*
-//         * Set the Nimbus look and feel
-//         */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /*
-//         * If Nimbus (introduced in Java SE 6) is not available, stay with the
-//         * default look and feel. For details see
-//         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-//         */
-//        try
-//        {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-//            {
-//                if ("Nimbus".equals(info.getName()))
-//                {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        }
-//        catch (ClassNotFoundException ex)
-//        {
-//            java.util.logging.Logger.getLogger(UserGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        catch (InstantiationException ex)
-//        {
-//            java.util.logging.Logger.getLogger(UserGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        catch (IllegalAccessException ex)
-//        {
-//            java.util.logging.Logger.getLogger(UserGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        catch (javax.swing.UnsupportedLookAndFeelException ex)
-//        {
-//            java.util.logging.Logger.getLogger(UserGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /*
-//         * Create and display the form
-//         */
-//        java.awt.EventQueue.invokeLater(new Runnable()
-//        {
-//
-//            public void run()
-//            {
-//                new UserGUI().setVisible(true);
-//            }
-//        });
-//    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField billAmount;
     private javax.swing.JTextField billDeductions;

@@ -25,14 +25,6 @@ public class TipCalculatorView
         this.settingsView = SettingsView.getInstance();
     }
 
-    public void updateView(Bill bill)
-    {
-        bill = this.session.processBill(bill);
-        this.billEntryView.updateView(bill);
-        this.tipTailorView.updateView(bill);
-        this.settingsView.updateView(bill);
-    }
-
     public static synchronized TipCalculatorView getInstance()
     {
         if (TipCalculatorView.instance == null)
@@ -41,5 +33,20 @@ public class TipCalculatorView
         }
 
         return TipCalculatorView.instance;
+    }
+    
+    public Bill createBill()
+    {
+        return this.session.createBill();
+    }
+    
+    public Bill updateView(Bill bill)
+    {
+        bill = this.session.processBill(bill);
+        this.billEntryView.updateView(bill);
+        this.tipTailorView.updateView(bill);
+        this.settingsView.updateView(bill);
+        
+        return bill;
     }
 }

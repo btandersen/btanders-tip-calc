@@ -18,7 +18,7 @@ public class Bill
     public double taxAmount;
     public double minTipPercent;
     public double maxTipPercent;
-    public ArrayList<String> guestList;
+    //public ArrayList<String> guestList;
     public ArrayList<Integer> guestRatings;
     public ArrayList<Double> guestTips;
     public boolean tipTailoring;
@@ -31,7 +31,6 @@ public class Bill
     public double subTotal;
     public double tipTotal;
     public double total;
-    public String status;
 
     public Bill()
     {
@@ -41,9 +40,15 @@ public class Bill
         this.minTipPercent = 5.0;
         this.maxTipPercent = 25.0;
 
-        this.guestList = new ArrayList<>();
+        //this.guestList = new ArrayList<>();
         this.guestRatings = new ArrayList<>();
         this.guestTips = new ArrayList<>();
+        
+        for (int i = 0; i < 9; i++)
+        {
+            this.guestRatings.add(new Integer(3));
+            this.guestTips.add(new Double(0.0));
+        }
 
         this.tipTailoring = false;
         this.includeTax = false;
@@ -54,8 +59,6 @@ public class Bill
         this.subTotal = 0.0;
         this.tipTotal = 0.0;
         this.total = 0.0;
-
-        this.status = "OK";
     }
 
     public Bill copy()
@@ -68,7 +71,7 @@ public class Bill
         copy.minTipPercent = this.minTipPercent;
         copy.maxTipPercent = this.maxTipPercent;
 
-        copy.guestList = new ArrayList<>(this.guestList);
+        //copy.guestList = new ArrayList<>(this.guestList);
         copy.guestRatings = new ArrayList<>(this.guestRatings);
         copy.guestTips = new ArrayList<>(this.guestTips);
 
@@ -81,8 +84,6 @@ public class Bill
         copy.subTotal = this.subTotal;
         copy.tipTotal = this.tipTotal;
         copy.total = this.total;
-
-        copy.status = this.status;
 
         return copy;
     }

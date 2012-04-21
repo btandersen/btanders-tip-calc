@@ -36,11 +36,11 @@ public class UserGUI extends javax.swing.JFrame
     private ArrayList<JTextField> guestTips;
     private DecimalFormat currencyFormatter;
     private DecimalFormat percentFormatter;
-    private double billAmountNum;
-    private double billDeductionsNum;
-    private double taxNum;
-    private double minTipPercentNum;
-    private double maxTipPercentNum;
+    //private double billAmountNum;
+    //private double billDeductionsNum;
+    //private double taxNum;
+    //private double minTipPercentNum;
+    //private double maxTipPercentNum;
 
     /**
      * UserGUI Constructor to initialize the interface
@@ -102,20 +102,20 @@ public class UserGUI extends javax.swing.JFrame
         this.billDeductions.setText("0.00");
         this.tax.setText("0.00");
 
-        this.billAmountNum = 0.0;
-        this.billDeductionsNum = 0.0;
-        this.taxNum = 0.0;
-
-        this.minTipPercentNum = 5.0;
-        this.maxTipPercentNum = 25.0;
-
-        this.minTipPercent.setText(this.percentFormatter.format(this.minTipPercentNum));
-        this.maxTipPercent.setText(this.percentFormatter.format(this.maxTipPercentNum));
-
-        this.tipRate.setText(this.percentFormatter.format(this.bill.tipRate).toString());
-        this.totalTip.setText("0.00");
-        this.tipPerPerson.setText("0.00");
-        this.total.setText("0.00");
+//        this.billAmountNum = 0.0;
+//        this.billDeductionsNum = 0.0;
+//        this.taxNum = 0.0;
+//
+//        this.minTipPercentNum = 5.0;
+//        this.maxTipPercentNum = 25.0;
+//
+//        this.minTipPercent.setText(this.percentFormatter.format(this.minTipPercentNum));
+//        this.maxTipPercent.setText(this.percentFormatter.format(this.maxTipPercentNum));
+//
+//        this.tipRate.setText(this.percentFormatter.format(this.bill.tipRate).toString());
+//        this.totalTip.setText("0.00");
+//        this.tipPerPerson.setText("0.00");
+//        this.total.setText("0.00");
 
         this.statusText.setText("OK");
 
@@ -871,7 +871,6 @@ public class UserGUI extends javax.swing.JFrame
     {//GEN-HEADEREND:event_numberOfGuestsActionPerformed
         this.updateGuestList();
         this.bill.numGuests = this.getNumberOfGuests();
-        this.bill = this.tipCalculatorView.updateView(bill);
         this.update();
     }//GEN-LAST:event_numberOfGuestsActionPerformed
 
@@ -879,32 +878,25 @@ public class UserGUI extends javax.swing.JFrame
     private void overallRatingStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_overallRatingStateChanged
     {//GEN-HEADEREND:event_overallRatingStateChanged
         this.bill.overallRating = this.overallRating.getValue();
-        this.bill = this.tipCalculatorView.updateView(bill);
         this.update();
     }//GEN-LAST:event_overallRatingStateChanged
 
     // Event handler for when the bill amount input is updated
     private void billAmountActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_billAmountActionPerformed
     {//GEN-HEADEREND:event_billAmountActionPerformed
-        double prev = this.billAmountNum;
-
         // First try to convert the user supplied input to a double
         try
         {
-            this.billAmountNum = Double.parseDouble(this.billAmount.getText());
+            double billAmount = Double.parseDouble(this.billAmount.getText());
 
             // if it is numeric and convertible, do some range checks
-            if (this.billAmountNum >= 0)
+            if (billAmount >= 0)
             {
-                // Update the status
-                this.bill.billAmount = this.billAmountNum;
-                this.bill = this.tipCalculatorView.updateView(bill);
+                this.bill.billAmount = billAmount;
                 this.statusMessage("OK");
             }
             else
             {
-                // Bad input so reset to previous value and warn user
-                this.billAmountNum = prev;
                 this.statusMessage("Invalid Bill Amount - Negative");
             }
         }
@@ -914,33 +906,25 @@ public class UserGUI extends javax.swing.JFrame
             this.statusMessage("Invalid Bill Amount - Not Numeric");
         }
 
-        // Update the GUI
-        //this.billAmount.setText(this.currencyFormatter.format(this.billAmountNum).toString());
         this.update();
     }//GEN-LAST:event_billAmountActionPerformed
 
     // Event handler for when the bill deduction input is updated
     private void billDeductionsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_billDeductionsActionPerformed
     {//GEN-HEADEREND:event_billDeductionsActionPerformed
-        double prev = this.billDeductionsNum;
-
         // First try to convert the user supplied input to a double
         try
         {
-            this.billDeductionsNum = Double.parseDouble(this.billDeductions.getText());
+            double deductionAmount = Double.parseDouble(this.billDeductions.getText());
 
             // if it is numeric and convertible, do some range checks
-            if ((this.billDeductionsNum >= 0) && (this.billDeductionsNum <= this.billAmountNum))
+            if ((deductionAmount >= 0) && (deductionAmount <= bill.billAmount))
             {
-                // Update the status
-                this.bill.deductionAmount = this.billDeductionsNum;
-                this.bill = this.tipCalculatorView.updateView(bill);
+                this.bill.deductionAmount = deductionAmount;
                 this.statusMessage("OK");
             }
             else
             {
-                // Bad input so reset to previous value and warn user
-                this.billDeductionsNum = prev;
                 this.statusMessage("Invalid Bill Deductions - Negative or Exceeds Bill");
             }
         }
@@ -950,33 +934,25 @@ public class UserGUI extends javax.swing.JFrame
             this.statusMessage("Invalid Bill Deductions - Not Numeric");
         }
 
-        // Update the GUI
-        //this.billDeductions.setText(this.currencyFormatter.format(this.billDeductionsNum).toString());
         this.update();
     }//GEN-LAST:event_billDeductionsActionPerformed
 
     // Event handler for when the tax amount input is updated
     private void taxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_taxActionPerformed
     {//GEN-HEADEREND:event_taxActionPerformed
-        double prev = this.taxNum;
-
         // First try to convert the user supplied input to a double
         try
         {
-            this.taxNum = Double.parseDouble(this.tax.getText());
+            double taxAmount = Double.parseDouble(this.tax.getText());
 
             // if it is numeric and convertible, do some range checks
-            if ((this.taxNum >= 0) && (this.taxNum <= this.billAmountNum))
+            if ((taxAmount >= 0) && (taxAmount <= this.bill.billAmount))
             {
-                // Update the status
-                this.bill.taxAmount = this.taxNum;
-                this.bill = this.tipCalculatorView.updateView(bill);
+                this.bill.taxAmount = taxAmount;
                 this.statusMessage("OK");
             }
             else
             {
-                // Bad input so reset to previous value and warn user
-                this.taxNum = prev;
                 this.statusMessage("Invalid Tax - Negative or Exceeds Bill");
             }
         }
@@ -986,33 +962,25 @@ public class UserGUI extends javax.swing.JFrame
             this.statusMessage("Invalid Tax Amount - Not Numeric");
         }
 
-        // Update the GUI
-        //this.tax.setText(this.currencyFormatter.format(this.taxNum).toString());
         this.update();
     }//GEN-LAST:event_taxActionPerformed
 
     // Event handler for when the min tip pct input is updated
     private void minTipPercentActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_minTipPercentActionPerformed
     {//GEN-HEADEREND:event_minTipPercentActionPerformed
-        double prev = this.minTipPercentNum;
-
         // First try to convert the user supplied input to a double
         try
         {
-            this.minTipPercentNum = Double.parseDouble(this.minTipPercent.getText());
+            double minTipPercent = Double.parseDouble(this.minTipPercent.getText());
 
             // if it is numeric and convertible, do some range checks
-            if ((this.minTipPercentNum >= 0) && (this.minTipPercentNum <= 100) && (this.minTipPercentNum <= this.maxTipPercentNum))
+            if ((minTipPercent >= 0) && (minTipPercent <= 100) && (minTipPercent <= this.bill.maxTipPercent))
             {
-                // Update the status
-                this.bill.minTipPercent = this.minTipPercentNum;
-                this.bill = this.tipCalculatorView.updateView(bill);
+                this.bill.minTipPercent = minTipPercent;
                 this.statusMessage("OK");
             }
             else
             {
-                // Bad input so reset to previous value and warn user
-                this.minTipPercentNum = prev;
                 this.statusMessage("Invalid Min Tip - Exceeds Max or Out-of-Range");
             }
         }
@@ -1022,33 +990,25 @@ public class UserGUI extends javax.swing.JFrame
             this.statusMessage("Invalid Min Tip - Not Numeric");
         }
 
-        // Update the GUI
-        //this.minTipPercent.setText(this.percentFormatter.format(this.minTipPercentNum).toString());
         this.update();
     }//GEN-LAST:event_minTipPercentActionPerformed
 
     // Event handler for when the max tip pct input is updated
     private void maxTipPercentActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_maxTipPercentActionPerformed
     {//GEN-HEADEREND:event_maxTipPercentActionPerformed
-        double prev = this.maxTipPercentNum;
-
         // First try to convert the user supplied input to a double
         try
         {
-            this.maxTipPercentNum = Double.parseDouble(this.maxTipPercent.getText());
+            double maxTipPercent = Double.parseDouble(this.maxTipPercent.getText());
 
             // if it is numeric and convertible, do some range checks
-            if ((this.maxTipPercentNum >= 0) && (this.maxTipPercentNum <= 100) && (this.maxTipPercentNum >= this.minTipPercentNum))
+            if ((maxTipPercent >= 0) && (maxTipPercent <= 100) && (maxTipPercent >= this.bill.minTipPercent))
             {
-                // Update the status
-                this.bill.maxTipPercent = this.maxTipPercentNum;
-                this.bill = this.tipCalculatorView.updateView(bill);
+                this.bill.maxTipPercent = maxTipPercent;
                 this.statusMessage("OK");
             }
             else
             {
-                // Bad input so reset to previous value and warn user
-                this.maxTipPercentNum = prev;
                 this.statusMessage("Invalid Max Tip - Less Than Min or Out-of-Range");
             }
         }
@@ -1058,8 +1018,6 @@ public class UserGUI extends javax.swing.JFrame
             this.statusMessage("Invalid Max Tip - Not Numeric");
         }
 
-        // Update the GUI
-        //this.maxTipPercent.setText(this.percentFormatter.format(this.maxTipPercentNum).toString());
         this.update();
     }//GEN-LAST:event_maxTipPercentActionPerformed
 
@@ -1069,78 +1027,67 @@ public class UserGUI extends javax.swing.JFrame
      */
     private void guest1ratingStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_guest1ratingStateChanged
     {//GEN-HEADEREND:event_guest1ratingStateChanged
-        this.bill.guestRatings.set(0, this.guest1rating.getValue());
-        this.bill = this.tipCalculatorView.updateView(bill);
+        this.bill.guestRatings.set(0, this.guestRatings.get(0).getValue());
         this.update();
     }//GEN-LAST:event_guest1ratingStateChanged
 
     private void guest2ratingStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_guest2ratingStateChanged
     {//GEN-HEADEREND:event_guest2ratingStateChanged
-        this.bill.guestRatings.set(1, this.guest2rating.getValue());
-        this.bill = this.tipCalculatorView.updateView(bill);
+        this.bill.guestRatings.set(1, this.guestRatings.get(1).getValue());
         this.update();
     }//GEN-LAST:event_guest2ratingStateChanged
 
     private void guest3ratingStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_guest3ratingStateChanged
     {//GEN-HEADEREND:event_guest3ratingStateChanged
-        this.bill.guestRatings.set(2, this.guest3rating.getValue());
-        this.bill = this.tipCalculatorView.updateView(bill);
+        this.bill.guestRatings.set(2, this.guestRatings.get(2).getValue());
         this.update();
     }//GEN-LAST:event_guest3ratingStateChanged
 
     private void guest4ratingStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_guest4ratingStateChanged
     {//GEN-HEADEREND:event_guest4ratingStateChanged
-        this.bill.guestRatings.set(3, this.guest4rating.getValue());
-        this.bill = this.tipCalculatorView.updateView(bill);
+        this.bill.guestRatings.set(3, this.guestRatings.get(3).getValue());
         this.update();
     }//GEN-LAST:event_guest4ratingStateChanged
 
     private void guest5ratingStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_guest5ratingStateChanged
     {//GEN-HEADEREND:event_guest5ratingStateChanged
-        this.bill.guestRatings.set(4, this.guest5rating.getValue());
-        this.bill = this.tipCalculatorView.updateView(bill);
+        this.bill.guestRatings.set(4, this.guestRatings.get(4).getValue());
         this.update();
     }//GEN-LAST:event_guest5ratingStateChanged
 
     private void guest6ratingStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_guest6ratingStateChanged
     {//GEN-HEADEREND:event_guest6ratingStateChanged
-        this.bill.guestRatings.set(5, this.guest6rating.getValue());
-        this.bill = this.tipCalculatorView.updateView(bill);
+        this.bill.guestRatings.set(5, this.guestRatings.get(5).getValue());
         this.update();
     }//GEN-LAST:event_guest6ratingStateChanged
 
     private void guest7ratingStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_guest7ratingStateChanged
     {//GEN-HEADEREND:event_guest7ratingStateChanged
-        this.bill.guestRatings.set(6, this.guest7rating.getValue());
-        this.bill = this.tipCalculatorView.updateView(bill);
+        this.bill.guestRatings.set(6, this.guestRatings.get(6).getValue());
         this.update();
     }//GEN-LAST:event_guest7ratingStateChanged
 
     private void guest8ratingStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_guest8ratingStateChanged
     {//GEN-HEADEREND:event_guest8ratingStateChanged
-        this.bill.guestRatings.set(7, this.guest8rating.getValue());
-        this.bill = this.tipCalculatorView.updateView(bill);
+        this.bill.guestRatings.set(7, this.guestRatings.get(7).getValue());
         this.update();
     }//GEN-LAST:event_guest8ratingStateChanged
 
     private void guest9ratingStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_guest9ratingStateChanged
     {//GEN-HEADEREND:event_guest9ratingStateChanged
-        this.bill.guestRatings.set(8, this.guest9rating.getValue());
-        this.bill = this.tipCalculatorView.updateView(bill);
+        this.bill.guestRatings.set(8, this.guestRatings.get(8).getValue());
         this.update();
     }//GEN-LAST:event_guest9ratingStateChanged
 
     private void includeTaxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_includeTaxActionPerformed
     {//GEN-HEADEREND:event_includeTaxActionPerformed
         this.bill.includeTax = this.includeTax.isSelected();
-        this.bill = this.tipCalculatorView.updateView(bill);
         this.update();
     }//GEN-LAST:event_includeTaxActionPerformed
 
     private void includeDeductionsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_includeDeductionsActionPerformed
     {//GEN-HEADEREND:event_includeDeductionsActionPerformed
         this.bill.includeDeductions = this.includeDeductions.isSelected();
-        this.bill = this.tipCalculatorView.updateView(bill);
         this.update();
     }//GEN-LAST:event_includeDeductionsActionPerformed
 
@@ -1157,9 +1104,7 @@ public class UserGUI extends javax.swing.JFrame
             this.tipPerPersonLabel.setText("Tip Per Person ($)");
         }
 
-        // Update the GUI
         this.bill.tipTailoring = this.useTipTailoring.isSelected();
-        this.bill = this.tipCalculatorView.updateView(bill);
         this.update();
     }//GEN-LAST:event_useTipTailoringActionPerformed
 
@@ -1167,11 +1112,13 @@ public class UserGUI extends javax.swing.JFrame
     // based on the user provided input
     private void update()
     {
+        this.bill = this.tipCalculatorView.updateView(bill);
+        
         this.billAmount.setText(this.currencyFormatter.format(this.bill.billAmount).toString());
         this.billDeductions.setText(this.currencyFormatter.format(this.bill.deductionAmount).toString());
         this.tax.setText(this.currencyFormatter.format(this.bill.taxAmount).toString());
         this.minTipPercent.setText(this.percentFormatter.format(this.bill.minTipPercent).toString());
-        this.maxTipPercent.setText(this.percentFormatter.format(this.maxTipPercentNum).toString());
+        this.maxTipPercent.setText(this.percentFormatter.format(this.bill.maxTipPercent).toString());
 
         // Get the tipRate
         this.tipRate.setText(this.percentFormatter.format(this.bill.tipRate).toString());

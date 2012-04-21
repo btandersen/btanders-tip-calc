@@ -30,7 +30,7 @@ public class Total
 
     public Bill calcTotal(Bill bill)
     {
-        bill.total = bill.billAmount - bill.deductionAmount + bill.taxAmount + bill.tipTotal;
+        bill.total = bill.subTotal + bill.tipTotal;
 
         return bill;
     }

@@ -35,8 +35,30 @@ public class Bill
     public double tipTotal;
     public double total;
     
+    public String status;
+    
     public Bill()
     {
+        this.billAmount = 0.0;
+        this.deductionAmount = 0.0;
+        this.taxAmount = 0.0;
+        this.minTipPercent = 5.0;
+        this.maxTipPercent = 25.0;
         
+        this.guestList = new ArrayList<>();
+        this.guestRatings = new ArrayList<>();
+        this.guestTips = new ArrayList<>();
+        
+        this.tipTailoring = false;
+        this.includeTax = false;
+        this.includeDeductions = true;
+        
+        this.tipRate = 0.0;
+        this.tipPerPerson = 0.0;
+        this.subTotal = 0.0;
+        this.tipTotal = 0.0;
+        this.total = 0.0;
+        
+        this.status = "OK";
     }
 }

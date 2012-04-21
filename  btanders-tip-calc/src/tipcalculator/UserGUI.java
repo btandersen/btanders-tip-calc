@@ -29,6 +29,8 @@ public class UserGUI extends javax.swing.JFrame
 {
 
     // Private member fields
+    private Bill bill = null;
+    private TipCalculatorView tipCalculatorView = null;
     private ArrayList<JTextField> guestList;
     private ArrayList<JSlider> guestRatings;
     private ArrayList<JTextField> guestTips;
@@ -46,6 +48,9 @@ public class UserGUI extends javax.swing.JFrame
     public UserGUI()
     {
         initComponents();
+
+        this.tipCalculatorView = TipCalculatorView.getInstance();
+        this.bill = tipCalculatorView.createBill();
 
         // These ArrayLists are used for future expansion of number of users
         this.guestList = new ArrayList<JTextField>();
@@ -107,7 +112,7 @@ public class UserGUI extends javax.swing.JFrame
         this.minTipPercent.setText(this.percentFormatter.format(this.minTipPercentNum));
         this.maxTipPercent.setText(this.percentFormatter.format(this.maxTipPercentNum));
 
-        this.tipRate.setText(this.percentFormatter.format(this.getTipRate()).toString());
+        this.tipRate.setText(this.percentFormatter.format(this.bill.tipRate).toString());
         this.totalTip.setText("0.00");
         this.tipPerPerson.setText("0.00");
         this.total.setText("0.00");
@@ -865,12 +870,16 @@ public class UserGUI extends javax.swing.JFrame
     private void numberOfGuestsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_numberOfGuestsActionPerformed
     {//GEN-HEADEREND:event_numberOfGuestsActionPerformed
         this.updateGuestList();
+        this.bill.numGuests = this.getNumberOfGuests();
+        this.bill = this.tipCalculatorView.updateView(bill);
         this.update();
     }//GEN-LAST:event_numberOfGuestsActionPerformed
 
     // Event handler for when the overall rating input is updated
     private void overallRatingStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_overallRatingStateChanged
     {//GEN-HEADEREND:event_overallRatingStateChanged
+        this.bill.overallRating = this.overallRating.getValue();
+        this.bill = this.tipCalculatorView.updateView(bill);
         this.update();
     }//GEN-LAST:event_overallRatingStateChanged
 
@@ -888,6 +897,8 @@ public class UserGUI extends javax.swing.JFrame
             if (this.billAmountNum >= 0)
             {
                 // Update the status
+                this.bill.billAmount = this.billAmountNum;
+                this.bill = this.tipCalculatorView.updateView(bill);
                 this.statusMessage("OK");
             }
             else
@@ -904,7 +915,7 @@ public class UserGUI extends javax.swing.JFrame
         }
 
         // Update the GUI
-        this.billAmount.setText(this.currencyFormatter.format(this.billAmountNum).toString());
+        //this.billAmount.setText(this.currencyFormatter.format(this.billAmountNum).toString());
         this.update();
     }//GEN-LAST:event_billAmountActionPerformed
 
@@ -922,6 +933,8 @@ public class UserGUI extends javax.swing.JFrame
             if ((this.billDeductionsNum >= 0) && (this.billDeductionsNum <= this.billAmountNum))
             {
                 // Update the status
+                this.bill.deductionAmount = this.billDeductionsNum;
+                this.bill = this.tipCalculatorView.updateView(bill);
                 this.statusMessage("OK");
             }
             else
@@ -938,7 +951,7 @@ public class UserGUI extends javax.swing.JFrame
         }
 
         // Update the GUI
-        this.billDeductions.setText(this.currencyFormatter.format(this.billDeductionsNum).toString());
+        //this.billDeductions.setText(this.currencyFormatter.format(this.billDeductionsNum).toString());
         this.update();
     }//GEN-LAST:event_billDeductionsActionPerformed
 
@@ -956,6 +969,8 @@ public class UserGUI extends javax.swing.JFrame
             if ((this.taxNum >= 0) && (this.taxNum <= this.billAmountNum))
             {
                 // Update the status
+                this.bill.taxAmount = this.taxNum;
+                this.bill = this.tipCalculatorView.updateView(bill);
                 this.statusMessage("OK");
             }
             else
@@ -972,7 +987,7 @@ public class UserGUI extends javax.swing.JFrame
         }
 
         // Update the GUI
-        this.tax.setText(this.currencyFormatter.format(this.taxNum).toString());
+        //this.tax.setText(this.currencyFormatter.format(this.taxNum).toString());
         this.update();
     }//GEN-LAST:event_taxActionPerformed
 
@@ -990,6 +1005,8 @@ public class UserGUI extends javax.swing.JFrame
             if ((this.minTipPercentNum >= 0) && (this.minTipPercentNum <= 100) && (this.minTipPercentNum <= this.maxTipPercentNum))
             {
                 // Update the status
+                this.bill.minTipPercent = this.minTipPercentNum;
+                this.bill = this.tipCalculatorView.updateView(bill);
                 this.statusMessage("OK");
             }
             else
@@ -1006,7 +1023,7 @@ public class UserGUI extends javax.swing.JFrame
         }
 
         // Update the GUI
-        this.minTipPercent.setText(this.percentFormatter.format(this.minTipPercentNum).toString());
+        //this.minTipPercent.setText(this.percentFormatter.format(this.minTipPercentNum).toString());
         this.update();
     }//GEN-LAST:event_minTipPercentActionPerformed
 
@@ -1024,6 +1041,8 @@ public class UserGUI extends javax.swing.JFrame
             if ((this.maxTipPercentNum >= 0) && (this.maxTipPercentNum <= 100) && (this.maxTipPercentNum >= this.minTipPercentNum))
             {
                 // Update the status
+                this.bill.maxTipPercent = this.maxTipPercentNum;
+                this.bill = this.tipCalculatorView.updateView(bill);
                 this.statusMessage("OK");
             }
             else
@@ -1040,7 +1059,7 @@ public class UserGUI extends javax.swing.JFrame
         }
 
         // Update the GUI
-        this.maxTipPercent.setText(this.percentFormatter.format(this.maxTipPercentNum).toString());
+        //this.maxTipPercent.setText(this.percentFormatter.format(this.maxTipPercentNum).toString());
         this.update();
     }//GEN-LAST:event_maxTipPercentActionPerformed
 
@@ -1050,56 +1069,78 @@ public class UserGUI extends javax.swing.JFrame
      */
     private void guest1ratingStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_guest1ratingStateChanged
     {//GEN-HEADEREND:event_guest1ratingStateChanged
+        this.bill.guestRatings.set(0, this.guest1rating.getValue());
+        this.bill = this.tipCalculatorView.updateView(bill);
         this.update();
     }//GEN-LAST:event_guest1ratingStateChanged
 
     private void guest2ratingStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_guest2ratingStateChanged
     {//GEN-HEADEREND:event_guest2ratingStateChanged
+        this.bill.guestRatings.set(1, this.guest2rating.getValue());
+        this.bill = this.tipCalculatorView.updateView(bill);
         this.update();
     }//GEN-LAST:event_guest2ratingStateChanged
 
     private void guest3ratingStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_guest3ratingStateChanged
     {//GEN-HEADEREND:event_guest3ratingStateChanged
+        this.bill.guestRatings.set(2, this.guest3rating.getValue());
+        this.bill = this.tipCalculatorView.updateView(bill);
         this.update();
     }//GEN-LAST:event_guest3ratingStateChanged
 
     private void guest4ratingStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_guest4ratingStateChanged
     {//GEN-HEADEREND:event_guest4ratingStateChanged
+        this.bill.guestRatings.set(3, this.guest4rating.getValue());
+        this.bill = this.tipCalculatorView.updateView(bill);
         this.update();
     }//GEN-LAST:event_guest4ratingStateChanged
 
     private void guest5ratingStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_guest5ratingStateChanged
     {//GEN-HEADEREND:event_guest5ratingStateChanged
+        this.bill.guestRatings.set(4, this.guest5rating.getValue());
+        this.bill = this.tipCalculatorView.updateView(bill);
         this.update();
     }//GEN-LAST:event_guest5ratingStateChanged
 
     private void guest6ratingStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_guest6ratingStateChanged
     {//GEN-HEADEREND:event_guest6ratingStateChanged
+        this.bill.guestRatings.set(5, this.guest6rating.getValue());
+        this.bill = this.tipCalculatorView.updateView(bill);
         this.update();
     }//GEN-LAST:event_guest6ratingStateChanged
 
     private void guest7ratingStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_guest7ratingStateChanged
     {//GEN-HEADEREND:event_guest7ratingStateChanged
+        this.bill.guestRatings.set(6, this.guest7rating.getValue());
+        this.bill = this.tipCalculatorView.updateView(bill);
         this.update();
     }//GEN-LAST:event_guest7ratingStateChanged
 
     private void guest8ratingStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_guest8ratingStateChanged
     {//GEN-HEADEREND:event_guest8ratingStateChanged
+        this.bill.guestRatings.set(7, this.guest8rating.getValue());
+        this.bill = this.tipCalculatorView.updateView(bill);
         this.update();
     }//GEN-LAST:event_guest8ratingStateChanged
 
     private void guest9ratingStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_guest9ratingStateChanged
     {//GEN-HEADEREND:event_guest9ratingStateChanged
+        this.bill.guestRatings.set(8, this.guest9rating.getValue());
+        this.bill = this.tipCalculatorView.updateView(bill);
         this.update();
     }//GEN-LAST:event_guest9ratingStateChanged
 
     private void includeTaxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_includeTaxActionPerformed
     {//GEN-HEADEREND:event_includeTaxActionPerformed
+        this.bill.includeTax = this.includeTax.isSelected();
+        this.bill = this.tipCalculatorView.updateView(bill);
         this.update();
     }//GEN-LAST:event_includeTaxActionPerformed
 
     private void includeDeductionsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_includeDeductionsActionPerformed
     {//GEN-HEADEREND:event_includeDeductionsActionPerformed
+        this.bill.includeDeductions = this.includeDeductions.isSelected();
+        this.bill = this.tipCalculatorView.updateView(bill);
         this.update();
     }//GEN-LAST:event_includeDeductionsActionPerformed
 
@@ -1117,6 +1158,8 @@ public class UserGUI extends javax.swing.JFrame
         }
 
         // Update the GUI
+        this.bill.tipTailoring = this.useTipTailoring.isSelected();
+        this.bill = this.tipCalculatorView.updateView(bill);
         this.update();
     }//GEN-LAST:event_useTipTailoringActionPerformed
 
@@ -1124,18 +1167,28 @@ public class UserGUI extends javax.swing.JFrame
     // based on the user provided input
     private void update()
     {
+        this.billAmount.setText(this.currencyFormatter.format(this.bill.billAmount).toString());
+        this.billDeductions.setText(this.currencyFormatter.format(this.bill.deductionAmount).toString());
+        this.tax.setText(this.currencyFormatter.format(this.bill.taxAmount).toString());
+        this.minTipPercent.setText(this.percentFormatter.format(this.bill.minTipPercent).toString());
+        this.maxTipPercent.setText(this.percentFormatter.format(this.maxTipPercentNum).toString());
+
         // Get the tipRate
-        this.tipRate.setText(this.percentFormatter.format(this.getTipRate()).toString());
+        this.tipRate.setText(this.percentFormatter.format(this.bill.tipRate).toString());
         // Get the per person tip amount
-        this.tipPerPerson.setText(this.currencyFormatter.format(this.calcTipPerPerson()).toString());
+        this.tipPerPerson.setText(this.currencyFormatter.format(this.bill.tipPerPerson).toString());
         // Dim the per person tip value is tailoring is used
-        this.tipPerPerson.setEnabled(!this.useTipTailoring.isSelected());
-        // Update the guest list items on the second tab
-        this.updateGuestList();
+        this.tipPerPerson.setEnabled(!this.bill.tipTailoring);
         // Update the total tip
-        this.totalTip.setText(this.currencyFormatter.format(this.calcTotalTip()).toString());
+        this.totalTip.setText(this.currencyFormatter.format(this.bill.tipTotal).toString());
         // Update the total amount
-        this.total.setText(this.currencyFormatter.format(this.billAmountNum - this.billDeductionsNum + this.taxNum + Double.parseDouble(this.totalTip.getText())));
+        this.total.setText(this.currencyFormatter.format(this.bill.total));
+
+        // Also, we calculate the individual tailored tip for each guest we needed
+        for (int i = 0; i < this.getNumberOfGuests(); i++)
+        {
+            this.guestTips.get(i).setText(this.currencyFormatter.format(this.bill.guestTips.get(i)));
+        }
     }
 
     // This method updates the guest list depending on how many guests are selected
@@ -1147,12 +1200,6 @@ public class UserGUI extends javax.swing.JFrame
             this.guestRatings.get(i).setEnabled(i < this.getNumberOfGuests());
             this.guestTips.get(i).setEnabled(i < this.getNumberOfGuests());
         }
-
-        // Also, we calculate the individual tailored tip for each guest we needed
-        for (int i = 0; i < this.getNumberOfGuests(); i++)
-        {
-            this.guestTips.get(i).setText(this.currencyFormatter.format(this.calcTipIndividual(i)));
-        }
     }
 
     // Simply gets the number of guests
@@ -1161,134 +1208,134 @@ public class UserGUI extends javax.swing.JFrame
         return (this.numberOfGuests.getSelectedIndex() + 1);
     }
 
-    // Calculates the tip rate based on whether tip tailoring is enabled
-    private double getTipRate()
-    {
-        // If tailoring is enabled...
-        if (this.useTipTailoring.isSelected())
-        {
-            double result = 0;
+//    // Calculates the tip rate based on whether tip tailoring is enabled
+//    private double getTipRate()
+//    {
+//        // If tailoring is enabled...
+//        if (this.useTipTailoring.isSelected())
+//        {
+//            double result = 0;
+//
+//            int count = 0;
+//
+//            // find out how many of the guest want to tip (slider not set to zero)
+//            for (int i = 0; i < this.getNumberOfGuests(); i++)
+//            {
+//                if (this.guestRatings.get(i).getValue() != 0)
+//                {
+//                    count++;
+//                }
+//            }
+//
+//            // From the users who do want to tip, determine the weighted tip rate
+//            if (count != 0)
+//            {
+//                for (int i = 0; i < this.getNumberOfGuests(); i++)
+//                {
+//                    result = result + (this.getIndividualTipRate(i) / (double) count); //this.getNumberOfGuests());
+//                }
+//            }
+//            else
+//            {
+//                result = 0;
+//            }
+//
+//
+//            return result;
+//        }
+//        // No tailoring...
+//        else
+//        {
+//            // Just calculate the tip rate using the overall slider
+//            return ((this.maxTipPercentNum - this.minTipPercentNum) / 4.0) * (this.overallRating.getValue() - 1) + this.minTipPercentNum;
+//        }
+//    }
 
-            int count = 0;
+//    // This method gets the tip rate for an individual when tailoring is used
+//    private double getIndividualTipRate(int index)
+//    {
+//        if (this.guestRatings.get(index).getValue() == 0)
+//        {
+//            return 0;
+//        }
+//        else
+//        {
+//            return ((this.maxTipPercentNum - this.minTipPercentNum) / 4.0) * (this.guestRatings.get(index).getValue() - 1) + this.minTipPercentNum;
+//        }
+//    }
 
-            // find out how many of the guest want to tip (slider not set to zero)
-            for (int i = 0; i < this.getNumberOfGuests(); i++)
-            {
-                if (this.guestRatings.get(i).getValue() != 0)
-                {
-                    count++;
-                }
-            }
+//    // This method calculates the per person tip if tailoring is not used
+//    private double calcTipPerPerson()
+//    {
+//        return this.calcSubTotal() * (this.getTipRate() / 100.0) / this.getNumberOfGuests();
+//    }
 
-            // From the users who do want to tip, determine the weighted tip rate
-            if (count != 0)
-            {
-                for (int i = 0; i < this.getNumberOfGuests(); i++)
-                {
-                    result = result + (this.getIndividualTipRate(i) / (double) count); //this.getNumberOfGuests());
-                }
-            }
-            else
-            {
-                result = 0;
-            }
+//    // Calculate an individual tip for a single guest in tailoring
+//    private double calcTipIndividual(int index)
+//    {
+//        int count = 0;
+//
+//        // See how many guests don't want to tip
+//        for (int i = 0; i < this.getNumberOfGuests(); i++)
+//        {
+//            if (this.guestRatings.get(i).getValue() != 0)
+//            {
+//                count++;
+//            }
+//        }
+//
+//        // If at least one person will tip, calculate the tip amount for the individual
+//        // based on their own tip rate
+//        if (count != 0)
+//        {
+//            return this.calcSubTotal() * (this.getIndividualTipRate(index) / 100.0) / count; //this.getNumberOfGuests();
+//        }
+//        else
+//        {
+//            return 0;
+//        }
+//    }
 
+//    // Calculates a subtotal depending on whether tips and deductions are to be used
+//    // in tip calculation
+//    private double calcSubTotal()
+//    {
+//        double result = this.billAmountNum;
+//
+//        if (this.includeTax.isSelected())
+//        {
+//            result = result + this.taxNum;
+//        }
+//
+//        if (this.includeDeductions.isSelected())
+//        {
+//            result = result - this.billDeductionsNum;
+//        }
+//
+//        return result;
+//    }
 
-            return result;
-        }
-        // No tailoring...
-        else
-        {
-            // Just calculate the tip rate using the overall slider
-            return ((this.maxTipPercentNum - this.minTipPercentNum) / 4.0) * (this.overallRating.getValue() - 1) + this.minTipPercentNum;
-        }
-    }
-
-    // This method gets the tip rate for an individual when tailoring is used
-    private double getIndividualTipRate(int index)
-    {
-        if (this.guestRatings.get(index).getValue() == 0)
-        {
-            return 0;
-        }
-        else
-        {
-            return ((this.maxTipPercentNum - this.minTipPercentNum) / 4.0) * (this.guestRatings.get(index).getValue() - 1) + this.minTipPercentNum;
-        }
-    }
-
-    // This method calculates the per person tip if tailoring is not used
-    private double calcTipPerPerson()
-    {
-        return this.calcSubTotal() * (this.getTipRate() / 100.0) / this.getNumberOfGuests();
-    }
-
-    // Calculate an individual tip for a single guest in tailoring
-    private double calcTipIndividual(int index)
-    {
-        int count = 0;
-
-        // See how many guests don't want to tip
-        for (int i = 0; i < this.getNumberOfGuests(); i++)
-        {
-            if (this.guestRatings.get(i).getValue() != 0)
-            {
-                count++;
-            }
-        }
-
-        // If at least one person will tip, calculate the tip amount for the individual
-        // based on their own tip rate
-        if (count != 0)
-        {
-            return this.calcSubTotal() * (this.getIndividualTipRate(index) / 100.0) / count; //this.getNumberOfGuests();
-        }
-        else
-        {
-            return 0;
-        }
-    }
-
-    // Calculates a subtotal depending on whether tips and deductions are to be used
-    // in tip calculation
-    private double calcSubTotal()
-    {
-        double result = this.billAmountNum;
-
-        if (this.includeTax.isSelected())
-        {
-            result = result + this.taxNum;
-        }
-
-        if (this.includeDeductions.isSelected())
-        {
-            result = result - this.billDeductionsNum;
-        }
-
-        return result;
-    }
-
-    // Determines the total tip based on either tailoring or straight up even split
-    private double calcTotalTip()
-    {
-        double result = 0;
-
-        if (this.useTipTailoring.isSelected())
-        {
-            // For tip tailoring, use the individual amounts
-            for (int i = 0; i < this.getNumberOfGuests(); i++)
-            {
-                result = result + Double.parseDouble(this.guestTips.get(i).getText());
-            }
-        }
-        else
-        {
-            // Otherwise use a straight even split
-            result = Double.parseDouble(this.tipPerPerson.getText()) * this.getNumberOfGuests();
-        }
-
-        return result;
-    }
+//    // Determines the total tip based on either tailoring or straight up even split
+//    private double calcTotalTip()
+//    {
+//        double result = 0;
+//
+//        if (this.useTipTailoring.isSelected())
+//        {
+//            // For tip tailoring, use the individual amounts
+//            for (int i = 0; i < this.getNumberOfGuests(); i++)
+//            {
+//                result = result + Double.parseDouble(this.guestTips.get(i).getText());
+//            }
+//        }
+//        else
+//        {
+//            // Otherwise use a straight even split
+//            result = Double.parseDouble(this.tipPerPerson.getText()) * this.getNumberOfGuests();
+//        }
+//
+//        return result;
+//    }
 
     // Updates the status message with messages for the user
     private void statusMessage(String str)

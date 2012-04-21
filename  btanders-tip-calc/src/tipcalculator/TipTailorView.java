@@ -16,7 +16,7 @@ public class TipTailorView
 
     private static TipTailorView instance = null;
     private DecimalFormat currencyFormatter = null;
-    private ArrayList<String> guestList = null;
+    //private ArrayList<String> guestList = null;
     private ArrayList<Integer> guestRatings = null;
     private ArrayList<Double> guestTips = null;
 
@@ -37,7 +37,7 @@ public class TipTailorView
 
     public void updateView(Bill bill)
     {
-        this.guestList = bill.guestList;
+        //this.guestList = bill.guestList;
         this.guestRatings = bill.guestRatings;
         this.guestTips = bill.guestTips;
     }

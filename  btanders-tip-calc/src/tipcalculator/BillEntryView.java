@@ -30,7 +30,8 @@ public class BillEntryView
 
     private BillEntryView()
     {
-        //
+        this.currencyFormatter = new DecimalFormat("#0.00");
+        this.percentFormatter = new DecimalFormat("#0.0");
     }
 
     public static synchronized BillEntryView getInstance()
@@ -56,5 +57,45 @@ public class BillEntryView
         this.tipTotal = bill.tipTotal;
         this.total = bill.total;
         this.tipTailoring = bill.tipTailoring;
+    }
+    
+    public String getBillAmount()
+    {
+        return this.currencyFormatter.format(this.billAmount);
+    }
+    
+    public String getDeductionAmount()
+    {
+        return this.currencyFormatter.format(this.deductionAmount);
+    }
+    
+    public String getTaxAmount()
+    {
+        return this.currencyFormatter.format(this.taxAmount);
+    }
+    
+    public String getTipRate()
+    {
+        return this.percentFormatter.format(this.tipRate);
+    }
+    
+    public String getTipPerPerson()
+    {
+        return this.currencyFormatter.format(this.tipPerPerson);
+    }
+    
+    public String getTipTotal()
+    {
+        return this.currencyFormatter.format(this.tipTotal);
+    }
+    
+    public String getTotal()
+    {
+        return this.currencyFormatter.format(this.total);
+    }
+    
+    public boolean getTipTailoring()
+    {
+        return this.tipTailoring;
     }
 }

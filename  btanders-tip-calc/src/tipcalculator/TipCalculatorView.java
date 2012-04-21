@@ -34,19 +34,89 @@ public class TipCalculatorView
 
         return TipCalculatorView.instance;
     }
-    
+
     public Bill createBill()
     {
         return this.session.createBill();
     }
-    
+
     public Bill updateView(Bill bill)
     {
         bill = this.session.processBill(bill);
         this.billEntryView.updateView(bill);
         this.tipTailorView.updateView(bill);
         this.settingsView.updateView(bill);
-        
+
         return bill;
+    }
+
+    public String getBillAmount()
+    {
+        return this.billEntryView.getBillAmount();
+    }
+
+    public String getDeductionAmount()
+    {
+        return this.billEntryView.getDeductionAmount();
+    }
+
+    public String getTaxAmount()
+    {
+        return this.billEntryView.getTaxAmount();
+    }
+
+    public String getTipRate()
+    {
+        return this.billEntryView.getTipRate();
+    }
+
+    public String getTipPerPerson()
+    {
+        return this.billEntryView.getTipPerPerson();
+    }
+
+    public String getTipTotal()
+    {
+        return this.billEntryView.getTipTotal();
+    }
+
+    public String getTotal()
+    {
+        return this.billEntryView.getTotal();
+    }
+
+    public boolean getTipTailoring()
+    {
+        return this.billEntryView.getTipTailoring();
+    }
+
+    public int getGuestRatings(int index)
+    {
+        return this.tipTailorView.getGuestRatings(index);
+    }
+
+    public String getGuestTip(int index)
+    {
+        return this.tipTailorView.getGuestTip(index);
+    }
+    
+    public String getMinTipPercent()
+    {
+        return this.settingsView.getMinTipPercent();
+    }
+    
+    public String getMaxTipPercent()
+    {
+        return this.settingsView.getMaxTipPercent();
+    }
+    
+    public boolean getIncludeTax()
+    {
+        return this.settingsView.getIncludeTax();
+    }
+    
+    public boolean getIncludeDeductions()
+    {
+        return this.settingsView.getIncludeDeductions();
     }
 }

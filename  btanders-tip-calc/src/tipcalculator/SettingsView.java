@@ -23,6 +23,7 @@ public class SettingsView
     private SettingsView()
     {
         //
+        this.percentFormatter = new DecimalFormat("#0.0");
     }
 
     public static synchronized SettingsView getInstance()
@@ -41,5 +42,25 @@ public class SettingsView
         this.maxTipPercent = bill.maxTipPercent;
         this.includeTax = bill.includeTax;
         this.includeDeductions = bill.includeDeductions;
+    }
+    
+    public String getMinTipPercent()
+    {
+        return this.percentFormatter.format(this.minTipPercent);
+    }
+    
+    public String getMaxTipPercent()
+    {
+        return this.percentFormatter.format(this.maxTipPercent);
+    }
+    
+    public boolean getIncludeTax()
+    {
+        return this.includeTax;
+    }
+    
+    public boolean getIncludeDeductions()
+    {
+        return this.includeDeductions;
     }
 }

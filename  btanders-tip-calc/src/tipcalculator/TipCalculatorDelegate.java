@@ -15,7 +15,7 @@ public class TipCalculatorDelegate
     
     public TipCalculatorDelegate()
     {
-        //
+        this.session = TipCalculatorSession.getInstance();
     }
     
     public Bill createBill()
@@ -25,6 +25,6 @@ public class TipCalculatorDelegate
     
     public Bill processBill(Bill bill)
     {
-        return bill;
+        return this.session.processBill(bill);
     }
 }

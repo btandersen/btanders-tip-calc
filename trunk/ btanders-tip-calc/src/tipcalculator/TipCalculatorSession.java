@@ -13,7 +13,6 @@ public class TipCalculatorSession
 {
 
     private static TipCalculatorSession instance = null;
-    private BillValidator billValidator = null;
     private TipRate tipRate = null;
     private SubTotal subTotal = null;
     private TipPerPerson tipPerPerson = null;
@@ -23,7 +22,6 @@ public class TipCalculatorSession
 
     private TipCalculatorSession()
     {
-        this.billValidator = BillValidator.getInstance();
         this.tipRate = TipRate.getInstance();
         this.subTotal = SubTotal.getInstance();
         this.tipPerPerson = TipPerPerson.getInstance();

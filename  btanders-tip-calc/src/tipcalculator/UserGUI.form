@@ -115,7 +115,7 @@
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="tax" max="32767" attributes="0"/>
                                   <Component id="billDeductions" max="32767" attributes="0"/>
-                                  <Component id="billAmount" max="32767" attributes="0"/>
+                                  <Component id="billAmountText" max="32767" attributes="0"/>
                                   <Component id="total" pref="188" max="32767" attributes="0"/>
                                   <Component id="tipPerPerson" max="32767" attributes="0"/>
                                   <Component id="totalTip" max="32767" attributes="0"/>
@@ -150,7 +150,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="billAmount" alignment="3" max="32767" attributes="0"/>
+                          <Component id="billAmountText" alignment="3" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -234,7 +234,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="numberOfGuestsActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="billAmount">
+            <Component class="javax.swing.JTextField" name="billAmountText">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="text" type="java.lang.String" value="20.00"/>
@@ -242,7 +242,7 @@
                 <Property name="name" type="java.lang.String" value=""/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="billAmountActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="billAmountTextActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">

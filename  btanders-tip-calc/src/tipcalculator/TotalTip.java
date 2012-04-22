@@ -7,6 +7,8 @@
  */
 package tipcalculator;
 
+import java.text.DecimalFormat;
+
 /**
  * TotalTip
  * 
@@ -20,11 +22,12 @@ public class TotalTip
 
     // private data member
     private static TotalTip instance = null;
+    private DecimalFormat currencyFormatter = null;
 
     // Private default constructor
     private TotalTip()
     {
-        // nothing to do here
+        this.currencyFormatter = new DecimalFormat("#0.00");
     }
 
     // Method to get the instance of the class
@@ -41,20 +44,20 @@ public class TotalTip
     // Method to calculate the total tip for a bill
     public Bill calcTotalTip(Bill bill)
     {
-        double result = 0;
+        double result = 0.0;
 
         if (bill.tipTailoring)
         {
             // For tip tailoring, use the individual amounts
             for (int i = 0; i < bill.numGuests; i++)
             {
-                result = result + bill.guestTips.get(i).doubleValue();
+                result = result + Double.parseDouble(this.currencyFormatter.format(bill.guestTips.get(i).doubleValue()));
             }
         }
         else
         {
             // Otherwise use a straight even split
-            result = bill.tipPerPerson * bill.numGuests;
+            result = bill.tipPerPerson * (double)bill.numGuests;
         }
 
         bill.tipTotal = result;

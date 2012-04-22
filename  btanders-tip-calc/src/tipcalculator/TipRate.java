@@ -7,6 +7,8 @@
  */
 package tipcalculator;
 
+import java.text.DecimalFormat;
+
 /**
  * TipRate
  * 
@@ -44,7 +46,7 @@ public class TipRate
         // If tailoring is enabled...
         if (bill.tipTailoring)
         {
-            double result = 0;
+            double result = 0.0;
 
             int count = 0;
 
@@ -62,7 +64,7 @@ public class TipRate
             {
                 for (int i = 0; i < bill.numGuests; i++)
                 {
-                    double individualTipRate = 0;
+                    double individualTipRate = 0.0;
 
                     if (bill.guestRatings.get(i).intValue() != 0)
                     {

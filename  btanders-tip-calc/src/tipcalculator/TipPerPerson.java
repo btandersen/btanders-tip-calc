@@ -7,6 +7,8 @@
  */
 package tipcalculator;
 
+import java.text.DecimalFormat;
+
 /**
  * TipPerPerson
  * 
@@ -20,11 +22,12 @@ public class TipPerPerson
 
     // Private data memeber
     private static TipPerPerson instance = null;
+    private DecimalFormat currencyFormatter = null;
 
     // Private default constructor
     private TipPerPerson()
     {
-        // nothing to do here...
+        this.currencyFormatter = new DecimalFormat("#0.00");
     }
 
     // Method to get the instance of the class
@@ -41,7 +44,7 @@ public class TipPerPerson
     // Method to calculate the tip per person
     public Bill calcTipPerPerson(Bill bill)
     {
-        bill.tipPerPerson = bill.subTotal * (bill.tipRate / 100.0) / bill.numGuests;
+        bill.tipPerPerson = Double.parseDouble(this.currencyFormatter.format(bill.subTotal * (bill.tipRate / 100.0) / (double)bill.numGuests));
 
         return bill;
     }

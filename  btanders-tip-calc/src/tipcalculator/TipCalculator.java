@@ -5,7 +5,7 @@
  * CSE 460 / 598
  * Online Graduate Student
  * 
- * Tip Calculator Version 1
+ * Tip Calculator Version 2
  * 
  * TipCalculator.java
  * 

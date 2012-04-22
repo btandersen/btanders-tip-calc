@@ -5,18 +5,28 @@
 package tipcalculator;
 
 /**
- *
+ * TipCalculatorView
+ * 
+ * The TipCalculatorView is implemented as a Singleton and represents the view
+ * for the client GUI. It maintains instances of the views for each tab of the
+ * GUI and provides an interface to each underlying view. It also acts as the
+ * connection to the TipCalculatorDelegate for the client.
+ * 
  * @author Brandon
  */
 public class TipCalculatorView
 {
 
+    // Private data members
     private static TipCalculatorView instance = null;
+    // Session for the delegate maintained here
     private TipCalculatorDelegate session = null;
+    // Instances of the underlying views for the GUI
     private BillEntryView billEntryView = null;
     private TipTailorView tipTailorView = null;
     private SettingsView settingsView = null;
 
+    // Default private constructor to init the instances
     private TipCalculatorView()
     {
         this.session = TipCalculatorDelegate.getInstance();
@@ -25,6 +35,7 @@ public class TipCalculatorView
         this.settingsView = SettingsView.getInstance();
     }
 
+    // Method to get the instance of the class
     public static synchronized TipCalculatorView getInstance()
     {
         if (TipCalculatorView.instance == null)
@@ -35,11 +46,13 @@ public class TipCalculatorView
         return TipCalculatorView.instance;
     }
 
+    // Interface to the delegate to get a Bill object
     public Bill createBill()
     {
         return this.session.createBill();
     }
 
+    // Interface to the GUI to process the bill and update the views
     public Bill updateView(Bill bill)
     {
         bill = this.session.processBill(bill);
@@ -48,6 +61,19 @@ public class TipCalculatorView
         this.settingsView.updateView(bill);
 
         return bill;
+    }
+
+    // The following methods provide and interface to the associated underlying
+    // views, allowing the GUI to get the results in the appropriate format
+    
+    public int getNumGuests()
+    {
+        return this.billEntryView.getNumGuests();
+    }
+
+    public int getOverallRating()
+    {
+        return this.billEntryView.getOverallRating();
     }
 
     public String getBillAmount()
@@ -99,22 +125,22 @@ public class TipCalculatorView
     {
         return this.tipTailorView.getGuestTip(index);
     }
-    
+
     public String getMinTipPercent()
     {
         return this.settingsView.getMinTipPercent();
     }
-    
+
     public String getMaxTipPercent()
     {
         return this.settingsView.getMaxTipPercent();
     }
-    
+
     public boolean getIncludeTax()
     {
         return this.settingsView.getIncludeTax();
     }
-    
+
     public boolean getIncludeDeductions()
     {
         return this.settingsView.getIncludeDeductions();

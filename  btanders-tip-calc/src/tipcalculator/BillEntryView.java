@@ -7,12 +7,17 @@ package tipcalculator;
 import java.text.DecimalFormat;
 
 /**
- *
+ * BillEntryView
+ * 
+ * The BillEntryView is implemented as a Singleton and provides an underlying
+ * view for the bill entry tab of the GUI.
+ * 
  * @author Brandon
  */
 public class BillEntryView
 {
 
+    // Private data memebers
     private static BillEntryView instance = null;
     private DecimalFormat currencyFormatter = null;
     private DecimalFormat percentFormatter = null;
@@ -28,12 +33,14 @@ public class BillEntryView
     private double total;
     private boolean tipTailoring;
 
+    // Private default constructor
     private BillEntryView()
     {
         this.currencyFormatter = new DecimalFormat("#0.00");
         this.percentFormatter = new DecimalFormat("#0.0");
     }
 
+    // Method to get the instance of the class
     public static synchronized BillEntryView getInstance()
     {
         if (BillEntryView.instance == null)
@@ -43,7 +50,8 @@ public class BillEntryView
 
         return BillEntryView.instance;
     }
-    
+
+    // Method to update the view
     public void updateView(Bill bill)
     {
         this.numGuests = bill.numGuests;
@@ -58,42 +66,55 @@ public class BillEntryView
         this.total = bill.total;
         this.tipTailoring = bill.tipTailoring;
     }
+
+    // The following methods are used to access the data of the view and
+    // return them in a standard format for use in a GUI
     
+    public int getNumGuests()
+    {
+        return this.numGuests;
+    }
+
+    public int getOverallRating()
+    {
+        return this.overallRating;
+    }
+
     public String getBillAmount()
     {
         return this.currencyFormatter.format(this.billAmount);
     }
-    
+
     public String getDeductionAmount()
     {
         return this.currencyFormatter.format(this.deductionAmount);
     }
-    
+
     public String getTaxAmount()
     {
         return this.currencyFormatter.format(this.taxAmount);
     }
-    
+
     public String getTipRate()
     {
         return this.percentFormatter.format(this.tipRate);
     }
-    
+
     public String getTipPerPerson()
     {
         return this.currencyFormatter.format(this.tipPerPerson);
     }
-    
+
     public String getTipTotal()
     {
         return this.currencyFormatter.format(this.tipTotal);
     }
-    
+
     public String getTotal()
     {
         return this.currencyFormatter.format(this.total);
     }
-    
+
     public boolean getTipTailoring()
     {
         return this.tipTailoring;

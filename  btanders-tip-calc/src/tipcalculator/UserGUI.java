@@ -84,8 +84,8 @@ public class UserGUI extends javax.swing.JFrame
         // Initialize all the fields to start with default values
         this.numberOfGuests.setSelectedIndex(0);
         this.overallRating.setValue(3);
-        this.update();
         this.statusText.setText("OK");
+        this.update();
 
         for (int i = 0; i < this.guestList.size(); i++)
         {
@@ -1077,27 +1077,34 @@ public class UserGUI extends javax.swing.JFrame
     }//GEN-LAST:event_useTipTailoringActionPerformed
 
     // Update method calls several other methods to update the tips and totals
-    // based on the user provided input
+    // based on the processed bill
     private void update()
     {
+        // This signals the view that an event has occurred in the GUI
+        // and the bill is passed for processing and the process bill
+        // is returned
         this.bill = this.tipCalculatorView.updateView(bill);
-
+        // Set the bill amount field
         this.billAmountText.setText(this.tipCalculatorView.getBillAmount());
+        // Set the bill deductions field
         this.billDeductions.setText(this.tipCalculatorView.getDeductionAmount());
+        // Set the tax field
         this.tax.setText(this.tipCalculatorView.getTaxAmount());
+        // Set the min tip percent field
         this.minTipPercent.setText(this.tipCalculatorView.getMinTipPercent());
+        // Set the max tip percent filed
         this.maxTipPercent.setText(this.tipCalculatorView.getMaxTipPercent());
-        // Get the tipRate
+        // Set the tip rate filed
         this.tipRate.setText(this.tipCalculatorView.getTipRate());
-        // Get the per person tip amount
+        // Set the per person tip field
         this.tipPerPerson.setText(this.tipCalculatorView.getTipPerPerson());
-        // Dim the per person tip value is tailoring is used
+        // Dim the per person tip value if tailoring is used
         this.tipPerPerson.setEnabled(!this.tipCalculatorView.getTipTailoring());
-        // Update the total tip
+        // Set the total tip field
         this.totalTip.setText(this.tipCalculatorView.getTipTotal());
-        // Update the total amount
+        // Set the total field
         this.total.setText(this.tipCalculatorView.getTotal());
-        // Also, we calculate the individual tailored tip for each guest we needed
+        // Set the individual tailored tip for each guest
         for (int i = 0; i < this.getNumberOfGuests(); i++)
         {
             this.guestTips.get(i).setText(this.tipCalculatorView.getGuestTip(i));

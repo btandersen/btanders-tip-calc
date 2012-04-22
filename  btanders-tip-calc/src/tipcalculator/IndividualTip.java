@@ -5,19 +5,26 @@
 package tipcalculator;
 
 /**
- *
+ * IndividualTip
+ * 
+ * The IndividualTip is implemented as a Singleton Worker object to simply
+ * calculate the individual tips for each guest given a bill.
+ * 
  * @author Brandon
  */
 public class IndividualTip
 {
 
+    // private data member
     private static IndividualTip instance = null;
 
+    // Private default contructor
     private IndividualTip()
     {
-        //
+        // nothing to do here...
     }
 
+    // Method to get the instance of the class
     public static synchronized IndividualTip getInstance()
     {
         if (IndividualTip.instance == null)
@@ -28,6 +35,7 @@ public class IndividualTip
         return IndividualTip.instance;
     }
 
+    // Method to calculate each individual's tip from a bill
     public Bill calcIndividualTip(Bill bill)
     {
         int count = 0;

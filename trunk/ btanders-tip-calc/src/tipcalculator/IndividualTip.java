@@ -7,6 +7,8 @@
  */
 package tipcalculator;
 
+import java.text.DecimalFormat;
+
 /**
  * IndividualTip
  * 
@@ -65,7 +67,7 @@ public class IndividualTip
                     individualTipRate = ((bill.maxTipPercent - bill.minTipPercent) / 4.0) * (bill.guestRatings.get(i).intValue() - 1) + bill.minTipPercent;
                 }
 
-                bill.guestTips.set(i, Double.valueOf((bill.subTotal * individualTipRate / 100.0) / count));
+                bill.guestTips.set(i, Double.valueOf((bill.subTotal * individualTipRate / 100.0) / (double)count));
             }
             else
             {

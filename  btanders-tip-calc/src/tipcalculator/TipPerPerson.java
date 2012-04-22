@@ -11,10 +11,10 @@ import java.text.DecimalFormat;
 
 /**
  * TipPerPerson
- * 
+ *
  * The TipPerPerson is implemented as a Singleton Worker object to simply
  * calculate the tip per person for a bill.
- * 
+ *
  * @author Brandon
  */
 public class TipPerPerson
@@ -44,7 +44,7 @@ public class TipPerPerson
     // Method to calculate the tip per person
     public Bill calcTipPerPerson(Bill bill)
     {
-        bill.tipPerPerson = Double.parseDouble(this.currencyFormatter.format(bill.subTotal * (bill.tipRate / 100.0) / (double)bill.numGuests));
+        bill.tipPerPerson = Double.parseDouble(this.currencyFormatter.format(bill.subTotal * (bill.tipRate / 100.0) / (double) bill.numGuests));
 
         return bill;
     }

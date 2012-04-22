@@ -7,14 +7,12 @@
  */
 package tipcalculator;
 
-import java.text.DecimalFormat;
-
 /**
  * TipRate
- * 
+ *
  * The TipRate is implemented as a Singleton Worker object that simply
  * calculates the tip rate given a Bill object.
- * 
+ *
  * @author Brandon
  */
 public class TipRate

@@ -11,10 +11,10 @@ import java.text.DecimalFormat;
 
 /**
  * BillEntryView
- * 
+ *
  * The BillEntryView is implemented as a Singleton and provides an underlying
  * view for the bill entry tab of the GUI.
- * 
+ *
  * @author Brandon
  */
 public class BillEntryView
@@ -72,7 +72,6 @@ public class BillEntryView
 
     // The following methods are used to access the data of the view and
     // return them in a standard format for use in a GUI
-    
     public int getNumGuests()
     {
         return this.numGuests;

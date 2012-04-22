@@ -11,10 +11,10 @@ import java.text.DecimalFormat;
 
 /**
  * TotalTip
- * 
- * The TotalTip is implemented as a Singleton Worker object to simply
- * calculate the total tip for a bill.
- * 
+ *
+ * The TotalTip is implemented as a Singleton Worker object to simply calculate
+ * the total tip for a bill.
+ *
  * @author Brandon
  */
 public class TotalTip
@@ -57,7 +57,7 @@ public class TotalTip
         else
         {
             // Otherwise use a straight even split
-            result = bill.tipPerPerson * (double)bill.numGuests;
+            result = bill.tipPerPerson * (double) bill.numGuests;
         }
 
         bill.tipTotal = result;

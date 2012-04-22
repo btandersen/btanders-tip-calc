@@ -13,7 +13,7 @@ package tipcalculator;
  * The TipCalculatorDelegate acts as a Business Delegate for between the client
  * and the Session Facade (the TipCalculatorSession). It is implemented as a
  * Singleton.
- * 
+ *
  * @author Brandon
  */
 public class TipCalculatorDelegate

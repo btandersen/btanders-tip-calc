@@ -9,10 +9,10 @@ package tipcalculator;
 
 /**
  * Total
- * 
- * The Total is implemented as a Singleton Worker object to simply
- * calculate the total for a bill.
- * 
+ *
+ * The Total is implemented as a Singleton Worker object to simply calculate the
+ * total for a bill.
+ *
  * @author Brandon
  */
 public class Total

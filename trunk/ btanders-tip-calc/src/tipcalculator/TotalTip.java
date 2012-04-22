@@ -1,6 +1,9 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Brandon T. Andersen
+ * 1000878186
+ * Spring 2012
+ * CSE 460 / 598
+ * Online Graduate Student
  */
 package tipcalculator;
 

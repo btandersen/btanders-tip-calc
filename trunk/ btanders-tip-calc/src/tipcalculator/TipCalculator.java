@@ -14,7 +14,7 @@ package tipcalculator;
 
 /**
  *
- * Main class for launching the UserGUI 
+ * Main class for launching the UserGUI
  */
 public class TipCalculator
 {

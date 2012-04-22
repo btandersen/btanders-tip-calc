@@ -7,12 +7,17 @@ package tipcalculator;
 import java.util.ArrayList;
 
 /**
- *
+ * Bill Class
+ * 
+ * The Bill acts as a Transfer Object to encapsulate and transfer data
+ * between the client and service.
+ * 
  * @author Brandon
  */
 public class Bill
 {
 
+    // All members are public since this is just a Transfer Object
     public double billAmount;
     public double deductionAmount;
     public double taxAmount;
@@ -31,6 +36,7 @@ public class Bill
     public double tipTotal;
     public double total;
 
+    // Constructor to initialize the Bill to default values
     public Bill()
     {
         this.billAmount = 0.0;
@@ -41,7 +47,7 @@ public class Bill
 
         this.guestRatings = new ArrayList<Integer>();
         this.guestTips = new ArrayList<Double>();
-        
+
         for (int i = 0; i < 9; i++)
         {
             this.guestRatings.add(new Integer(3));
@@ -57,31 +63,5 @@ public class Bill
         this.subTotal = 0.0;
         this.tipTotal = 0.0;
         this.total = 0.0;
-    }
-
-    public Bill copy()
-    {
-        Bill copy = new Bill();
-
-        copy.billAmount = this.billAmount;
-        copy.deductionAmount = this.deductionAmount;
-        copy.taxAmount = this.taxAmount;
-        copy.minTipPercent = this.minTipPercent;
-        copy.maxTipPercent = this.maxTipPercent;
-
-        copy.guestRatings = new ArrayList<Integer>(this.guestRatings);
-        copy.guestTips = new ArrayList<Double>(this.guestTips);
-
-        copy.tipTailoring = this.tipTailoring;
-        copy.includeTax = this.includeTax;
-        copy.includeDeductions = this.includeDeductions;
-
-        copy.tipRate = this.tipRate;
-        copy.tipPerPerson = this.tipPerPerson;
-        copy.subTotal = this.subTotal;
-        copy.tipTotal = this.tipTotal;
-        copy.total = this.total;
-
-        return copy;
     }
 }

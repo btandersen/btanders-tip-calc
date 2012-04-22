@@ -13,7 +13,7 @@ package tipcalculator;
  * The TipCalculatorSession is a Session Facade that provides the logic for
  * calculating a bill using various worker sessions to do the work. It is
  * implemented as a Singleton.
- * 
+ *
  * @author Brandon
  */
 public class TipCalculatorSession

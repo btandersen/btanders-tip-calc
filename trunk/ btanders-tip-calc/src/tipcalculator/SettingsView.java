@@ -11,9 +11,10 @@ import java.text.DecimalFormat;
 
 /**
  * SettingsView
- * 
+ *
  * The SettingsView is implemented as a Singleton and provides an underlying
  * view for the settings tab of the GUI.
+ *
  * @author Brandon
  */
 public class SettingsView
@@ -55,7 +56,6 @@ public class SettingsView
 
     // The following methods are used to access the data of the view and
     // return them in a standard format for use in a GUI
-    
     public String getMinTipPercent()
     {
         return this.percentFormatter.format(this.minTipPercent);

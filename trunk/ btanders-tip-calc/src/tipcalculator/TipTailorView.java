@@ -12,10 +12,10 @@ import java.util.ArrayList;
 
 /**
  * TipTailorView
- * 
+ *
  * The TipTailorView is implemented as a Singleton and provides an underlying
  * view for the tip tailoring tab of the GUI.
- * 
+ *
  * @author Brandon
  */
 public class TipTailorView
@@ -53,7 +53,6 @@ public class TipTailorView
 
     // The following methods are used to access the data of the view and
     // return them in a standard format for use in a GUI
-    
     public int getGuestRatings(int index)
     {
         return this.guestRatings.get(index).intValue();

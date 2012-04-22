@@ -9,10 +9,10 @@ package tipcalculator;
 
 /**
  * SubTotal
- * 
+ *
  * The SubTotal is implemented as a Singleton Worker object that simply
  * calculates the bill subtotal given a bill.
- * 
+ *
  * @author Brandon
  */
 public class SubTotal

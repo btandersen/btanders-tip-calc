@@ -9,12 +9,12 @@ package tipcalculator;
 
 /**
  * TipCalculatorView
- * 
+ *
  * The TipCalculatorView is implemented as a Singleton and represents the view
  * for the client GUI. It maintains instances of the views for each tab of the
  * GUI and provides an interface to each underlying view. It also acts as the
  * connection to the TipCalculatorDelegate for the client.
- * 
+ *
  * @author Brandon
  */
 public class TipCalculatorView
@@ -68,7 +68,6 @@ public class TipCalculatorView
 
     // The following methods provide and interface to the associated underlying
     // views, allowing the GUI to get the results in the appropriate format
-    
     public int getNumGuests()
     {
         return this.billEntryView.getNumGuests();

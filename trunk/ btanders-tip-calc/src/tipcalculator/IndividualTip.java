@@ -7,14 +7,12 @@
  */
 package tipcalculator;
 
-import java.text.DecimalFormat;
-
 /**
  * IndividualTip
- * 
+ *
  * The IndividualTip is implemented as a Singleton Worker object to simply
  * calculate the individual tips for each guest given a bill.
- * 
+ *
  * @author Brandon
  */
 public class IndividualTip
@@ -67,7 +65,7 @@ public class IndividualTip
                     individualTipRate = ((bill.maxTipPercent - bill.minTipPercent) / 4.0) * (bill.guestRatings.get(i).intValue() - 1) + bill.minTipPercent;
                 }
 
-                bill.guestTips.set(i, Double.valueOf((bill.subTotal * individualTipRate / 100.0) / (double)count));
+                bill.guestTips.set(i, Double.valueOf((bill.subTotal * individualTipRate / 100.0) / (double) count));
             }
             else
             {

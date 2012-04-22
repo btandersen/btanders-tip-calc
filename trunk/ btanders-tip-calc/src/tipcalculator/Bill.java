@@ -11,10 +11,10 @@ import java.util.ArrayList;
 
 /**
  * Bill Class
- * 
- * The Bill acts as a Transfer Object to encapsulate and transfer data
- * between the client and service.
- * 
+ *
+ * The Bill acts as a Transfer Object to encapsulate and transfer data between
+ * the client and service.
+ *
  * @author Brandon
  */
 public class Bill
